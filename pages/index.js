@@ -2,7 +2,7 @@ import Head from "next/head";
 
 export default function Home() {
   return (
-    <div>
+    <div className="h-60">
       <Head>
         <title>GearDenim</title>
         <meta
