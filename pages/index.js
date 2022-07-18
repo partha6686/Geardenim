@@ -1,8 +1,11 @@
 import Head from "next/head";
+import Image from "next/image";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
 
 export default function Home() {
   return (
-    <div className="h-60">
+    <div>
       <Head>
         <title>GearDenim</title>
         <meta
@@ -11,7 +14,39 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1 className="text-3xl font-bold underline mx-4">Hello world!</h1>
+      <div>
+        <Carousel
+          showArrows={true}
+          autoPlay={true}
+          infiniteLoop={true}
+          showThumbs={false}
+        >
+          <div className="h-96 w-full relative">
+            <Image
+              className="object-cover"
+              src="/hero-1.jpg"
+              alt="hero-suits"
+              layout="fill"
+            />
+          </div>
+          <div className="h-96 w-full relative">
+            <Image
+              className="object-cover"
+              src="/hero-2.jpg"
+              alt="hero-suits"
+              layout="fill"
+            />
+          </div>
+          <div className="h-96 w-full relative">
+            <Image
+              className="object-cover"
+              src="/hero-4.jpg"
+              alt="hero-suits"
+              layout="fill"
+            />
+          </div>
+        </Carousel>
+      </div>
     </div>
   );
 }
