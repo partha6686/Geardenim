@@ -59,7 +59,7 @@ const Navbar = () => {
       </div>
 
       {/*SECONDARY NAV*/}
-      <div className="flex justify-start px-1 md:px-5 py-1 text-xs sm:text-base space-x-1 bg-cust_green">
+      <div className="flex justify-start px-1 md:px-5 py-1 text-xs sm:text-base space-x-1 bg-cust_green shadow-md">
         <div
           className="px-2 py-1 text-cust_white hover:border-2 hover:border-cust_white border-2 border-cust_green rounded-md flex  items-center cursor-pointer"
           onClick={handleSidebar}
@@ -68,22 +68,22 @@ const Navbar = () => {
           <p className="ml-2">ALL</p>
         </div>
         <div className="px-2 py-1 text-cust_white hover:border-2 hover:border-cust_white border-2 border-cust_green rounded-md">
-          <Link href="/suits">SUITS</Link>
+          <Link href="/shop/suits">SUITS</Link>
         </div>
         <div className="px-2 py-1 text-cust_white hover:border-2 hover:border-cust_white border-2 border-cust_green rounded-md">
-          <Link href="/jackets">JACKETS</Link>
+          <Link href="/shop/jackets">JACKETS</Link>
         </div>
         <div className="px-2 py-1 text-cust_white hover:border-2 hover:border-cust_white border-2 border-cust_green rounded-md">
-          <Link href="/pants">PANTS</Link>
+          <Link href="/shop/pants">PANTS</Link>
         </div>
         <div className="px-2 py-1 text-cust_white hover:border-2 hover:border-cust_white border-2 border-cust_green rounded-md hidden sm:inline-block">
-          <Link href="/gloves">GLOVES</Link>
+          <Link href="/shop/gloves">GLOVES</Link>
         </div>
         <div className="px-2 py-1 text-cust_white hover:border-2 hover:border-cust_white border-2 border-cust_green rounded-md hidden sm:inline-block">
-          <Link href="/helmets">HELMETS</Link>
+          <Link href="/shop/helmets">HELMETS</Link>
         </div>
         <div className="px-2 py-1 text-cust_white hover:border-2 hover:border-cust_white border-2 border-cust_green rounded-md hidden sm:inline-block">
-          <Link href="/boots">BOOTS</Link>
+          <Link href="/shop/boots">BOOTS</Link>
         </div>
       </div>
 
@@ -103,66 +103,106 @@ const Navbar = () => {
                 <h3 className="py-2 my-1 text-xl font-semibold pl-4">
                   Trending
                 </h3>
-                <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer ">
-                  <Link href="/">Best Sellers</Link>
-                </div>
-                <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
-                  <Link href="/">New Releases</Link>
-                </div>
+                <Link href="/shop/best-sellers">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer ">
+                    Best Sellers
+                  </div>
+                </Link>
+                <Link href="/shop/deals-of-the-week">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                    Deals of the week
+                  </div>
+                </Link>
+                <Link href="/shop/new-releases">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                    New Releases
+                  </div>
+                </Link>
               </div>
               <div className="  my-3">
                 <h3 className="py-2 my-1 text-xl font-semibold pl-4">
                   Shop by Category
                 </h3>
-                <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
-                  <Link href="/suits">Suits</Link>
-                </div>
-                <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
-                  <Link href="/jackets">Jackets</Link>
-                </div>
-                <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
-                  <Link href="/pants">Pants</Link>
-                </div>
-                <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
-                  <Link href="/gloves">Gloves</Link>
-                </div>
-                <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
-                  <Link href="/helmets">Helmets</Link>
-                </div>
-                <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
-                  <Link href="/boots">Boots</Link>
-                </div>
+                <Link href="/shop/suits">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                    Suits
+                  </div>
+                </Link>
+                <Link href="/shop/jackets">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                    Jackets
+                  </div>
+                </Link>
+                <Link href="/shop/pants">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                    Pants
+                  </div>
+                </Link>
+                <Link href="/shop/gloves">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                    Gloves
+                  </div>
+                </Link>
+                <Link href="/shop/helmets">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                    Helmets
+                  </div>
+                </Link>
+                <Link href="/shop/boots">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                    Boots
+                  </div>
+                </Link>
               </div>
               <div className="  my-3">
                 <h3 className="py-2 my-1 text-xl font-semibold pl-4">
                   Shop by Brands
                 </h3>
-                <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
-                  <Link href="/suits">Puma</Link>
-                </div>
-                <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
-                  <Link href="/jackets">Kawasaki</Link>
-                </div>
-                <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
-                  <Link href="/pants">Royal Enfield</Link>
-                </div>
+                <Link href="/shop/brand/bmw">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                    BMW
+                  </div>
+                </Link>
+                <Link href="/shop/brand/ktm">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                    KTM
+                  </div>
+                </Link>
+                <Link href="/shop/brand/kawasaki">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                    Kawasaki
+                  </div>
+                </Link>
+                <Link href="/shop/brand/royal-enfield">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                    Royal Enfield
+                  </div>
+                </Link>
               </div>
               <div className="  my-3">
                 <h3 className="py-2 my-1 text-xl font-semibold pl-4">
                   Help & Settings
                 </h3>
-                <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
-                  <Link href="/profile">Your Account</Link>
-                </div>
-                <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
-                  <Link href="/myorders">Your Orders</Link>
-                </div>
-                <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
-                  <Link href="/contactus">Customer Service</Link>
-                </div>
-                <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
-                  <Link href="/">Sign out</Link>
-                </div>
+                <Link href="/profile">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                    Your Account
+                  </div>
+                </Link>
+                <Link href="/myorders">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                    Your Orders
+                  </div>
+                </Link>
+                <Link href="/contactus">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                    Customer Service
+                  </div>
+                </Link>
+                <Link href="/">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                    Sign out
+                  </div>
+                </Link>
               </div>
             </div>
           </div>
