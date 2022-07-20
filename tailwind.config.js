@@ -12,7 +12,7 @@ module.exports = {
       current: "currentColor",
       cust_dark: "#272727",
       cust_green: "#50D890",
-      cust_light: "#EFFFFB",
+      cust_light: "#f6f7fb",
       cust_blue: "#4F98CA",
       cust_light_text: "#5F7161",
       cust_gray: "#EEEEEE",
