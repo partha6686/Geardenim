@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineClose } from "react-icons/ai";
 import CartCard from "../components/CartCard";
+import { BsBagCheckFill } from "react-icons/bs";
 
 const Cart = () => {
   return (
@@ -39,8 +40,9 @@ const Cart = () => {
               <p className="float-right text-cust_dark">₹ 10</p>
               <p className="clear-both mb-2"></p>
               <Link href={"/checkout"}>
-                <button className="w-full h-10 bg-cust_green text-center my-3 text-cust_white font-semibold ">
-                  PLACE ORDER
+                <button className="w-full h-11 bg-cust_green my-3 text-cust_white font-semibold flex justify-center items-center">
+                  <BsBagCheckFill className="text-lg mx-1" />
+                  <p>PLACE ORDER</p>
                 </button>
               </Link>
             </div>

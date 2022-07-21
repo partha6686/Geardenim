@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BiSearch } from "react-icons/bi";
@@ -8,9 +8,17 @@ import { HiMenuAlt2 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
 
 const Navbar = () => {
+  const ref = useRef();
   const [sidebar, setSidebar] = useState(false);
   const handleSidebar = () => {
     setSidebar(!sidebar);
+    if (ref.current.classList.contains("-translate-x-full")) {
+      ref.current.classList.remove("-translate-x-full");
+      ref.current.classList.add("-translate-x-0");
+    } else {
+      ref.current.classList.remove("-translate-x-0");
+      ref.current.classList.add("-translate-x-full");
+    }
   };
 
   return (
@@ -90,125 +98,125 @@ const Navbar = () => {
 
       {/*SIDE NAV*/}
       {sidebar && (
-        <div className="w-full h-full fixed top-0 left-0 backdrop-brightness-50 z-30">
-          <div className="w-72 sm:w-96 fixed top-0 left-0 bg-cust_white z-50">
-            <div className="p-4 bg-cust_green text-cust_white text-2xl font-bold flex items-center justify-between">
-              <h2 className="cursor-pointer">Hello, Partha</h2>
-              <AiOutlineClose
-                className="cursor-pointer text-3xl"
-                onClick={handleSidebar}
-              />
-            </div>
-            <div className="h-screen overflow-scroll pb-14">
-              <div className="my-3">
-                <h3 className="py-2 my-1 text-xl font-semibold pl-4">
-                  Trending
-                </h3>
-                <Link href="/shop/best-sellers">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer ">
-                    Best Sellers
-                  </div>
-                </Link>
-                <Link href="/shop/deals-of-the-week">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
-                    Deals of the week
-                  </div>
-                </Link>
-                <Link href="/shop/new-releases">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
-                    New Releases
-                  </div>
-                </Link>
+        <div className="w-full h-full fixed top-0 left-0 backdrop-brightness-50 z-30"></div>
+      )}
+      <div
+        ref={ref}
+        className="w-72 sm:w-96 fixed top-0 left-0 bg-cust_white z-50 transform transition-transform -translate-x-full"
+      >
+        <div className="p-4 bg-cust_green text-cust_white text-2xl font-bold flex items-center justify-between">
+          <h2 className="cursor-pointer">Hello, Partha</h2>
+          <AiOutlineClose
+            className="cursor-pointer text-3xl"
+            onClick={handleSidebar}
+          />
+        </div>
+        <div className="h-screen overflow-scroll pb-14">
+          <div className="my-3">
+            <h3 className="py-2 my-1 text-xl font-semibold pl-4">Trending</h3>
+            <Link href="/shop/best-sellers">
+              <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer ">
+                Best Sellers
               </div>
-              <div className="  my-3">
-                <h3 className="py-2 my-1 text-xl font-semibold pl-4">
-                  Shop by Category
-                </h3>
-                <Link href="/shop/suits">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
-                    Suits
-                  </div>
-                </Link>
-                <Link href="/shop/jackets">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
-                    Jackets
-                  </div>
-                </Link>
-                <Link href="/shop/pants">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
-                    Pants
-                  </div>
-                </Link>
-                <Link href="/shop/gloves">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
-                    Gloves
-                  </div>
-                </Link>
-                <Link href="/shop/helmets">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
-                    Helmets
-                  </div>
-                </Link>
-                <Link href="/shop/boots">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
-                    Boots
-                  </div>
-                </Link>
+            </Link>
+            <Link href="/shop/deals-of-the-week">
+              <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
+                Deals of the week
               </div>
-              <div className="  my-3">
-                <h3 className="py-2 my-1 text-xl font-semibold pl-4">
-                  Shop by Brands
-                </h3>
-                <Link href="/shop/brand/bmw">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
-                    BMW
-                  </div>
-                </Link>
-                <Link href="/shop/brand/ktm">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
-                    KTM
-                  </div>
-                </Link>
-                <Link href="/shop/brand/kawasaki">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
-                    Kawasaki
-                  </div>
-                </Link>
-                <Link href="/shop/brand/royal-enfield">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
-                    Royal Enfield
-                  </div>
-                </Link>
+            </Link>
+            <Link href="/shop/new-releases">
+              <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
+                New Releases
               </div>
-              <div className="  my-3">
-                <h3 className="py-2 my-1 text-xl font-semibold pl-4">
-                  Help & Settings
-                </h3>
-                <Link href="/profile">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
-                    Your Account
-                  </div>
-                </Link>
-                <Link href="/myorders">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
-                    Your Orders
-                  </div>
-                </Link>
-                <Link href="/contactus">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
-                    Customer Service
-                  </div>
-                </Link>
-                <Link href="/">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
-                    Sign out
-                  </div>
-                </Link>
+            </Link>
+          </div>
+          <div className="  my-3">
+            <h3 className="py-2 my-1 text-xl font-semibold pl-4">
+              Shop by Category
+            </h3>
+            <Link href="/shop/suits">
+              <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
+                Suits
               </div>
-            </div>
+            </Link>
+            <Link href="/shop/jackets">
+              <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
+                Jackets
+              </div>
+            </Link>
+            <Link href="/shop/pants">
+              <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
+                Pants
+              </div>
+            </Link>
+            <Link href="/shop/gloves">
+              <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
+                Gloves
+              </div>
+            </Link>
+            <Link href="/shop/helmets">
+              <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
+                Helmets
+              </div>
+            </Link>
+            <Link href="/shop/boots">
+              <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
+                Boots
+              </div>
+            </Link>
+          </div>
+          <div className="  my-3">
+            <h3 className="py-2 my-1 text-xl font-semibold pl-4">
+              Shop by Brands
+            </h3>
+            <Link href="/shop/brand/bmw">
+              <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
+                BMW
+              </div>
+            </Link>
+            <Link href="/shop/brand/ktm">
+              <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
+                KTM
+              </div>
+            </Link>
+            <Link href="/shop/brand/kawasaki">
+              <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
+                Kawasaki
+              </div>
+            </Link>
+            <Link href="/shop/brand/royal-enfield">
+              <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
+                Royal Enfield
+              </div>
+            </Link>
+          </div>
+          <div className="  my-3">
+            <h3 className="py-2 my-1 text-xl font-semibold pl-4">
+              Help & Settings
+            </h3>
+            <Link href="/profile">
+              <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
+                Your Account
+              </div>
+            </Link>
+            <Link href="/myorders">
+              <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
+                Your Orders
+              </div>
+            </Link>
+            <Link href="/contactus">
+              <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
+                Customer Service
+              </div>
+            </Link>
+            <Link href="/">
+              <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
+                Sign out
+              </div>
+            </Link>
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 };
