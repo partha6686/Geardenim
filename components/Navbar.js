@@ -14,50 +14,51 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="">
-      <div className="mainnav flex justify-between p-2 items-center">
-        <div className="">
-          <Link href="/">
-            <a>
-              <Image
-                src="/logo.jpg"
-                alt="geardenim-logo"
-                width={200}
-                height={50}
-              />
-            </a>
-          </Link>
-        </div>
-        <div className="hidden sm:flex h-10 mx-5 flex-grow bg-cust_green rounded-md cursor-pointer items-center">
-          <input
-            className="flex-grow focus:outline-none h-full bg-cust_gray rounded-l-md px-2"
-            type="text"
-            name="search"
-            id="search"
-            placeholder="Search for products, brands and more"
-          />
-          <div className="mx-2">
-            <BiSearch className="text-2xl" />
-          </div>
-        </div>
-        <div className="flex">
-          <div className="mx-3">
-            <Link href="/signin">
+    <>
+      <div className="sticky top-0 left-0 right-0 z-20 shadow-lg">
+        <div className="mainnav flex justify-between p-2 items-center bg-cust_white">
+          <div className="">
+            <Link href="/">
               <a>
-                <FaUser className="text-xl sm:text-2xl text-cust_dark hover:text-cust_green" />
+                <Image
+                  src="/logo.jpg"
+                  alt="geardenim-logo"
+                  width={200}
+                  height={50}
+                />
               </a>
             </Link>
           </div>
-          <div className="mx-3">
-            <Link href="/cart">
-              <a>
-                <FiShoppingCart className="text-xl sm:text-2xl text-cust_dark hover:text-cust_green" />
-              </a>
-            </Link>
+          <div className="hidden sm:flex h-10 mx-5 flex-grow bg-cust_green rounded-md cursor-pointer items-center">
+            <input
+              className="flex-grow focus:outline-none h-full bg-cust_grey rounded-l-md px-2"
+              type="text"
+              name="search"
+              id="search"
+              placeholder="Search for products, brands and more"
+            />
+            <div className="mx-2">
+              <BiSearch className="text-2xl" />
+            </div>
+          </div>
+          <div className="flex">
+            <div className="mx-3">
+              <Link href="/signin">
+                <a>
+                  <FaUser className="text-xl sm:text-2xl text-cust_dark hover:text-cust_green" />
+                </a>
+              </Link>
+            </div>
+            <div className="mx-3">
+              <Link href="/cart">
+                <a>
+                  <FiShoppingCart className="text-xl sm:text-2xl text-cust_dark hover:text-cust_green" />
+                </a>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
-
       {/*SECONDARY NAV*/}
       <div className="flex justify-start px-1 md:px-5 py-1 text-xs sm:text-base space-x-1 bg-cust_green shadow-md">
         <div
@@ -104,17 +105,17 @@ const Navbar = () => {
                   Trending
                 </h3>
                 <Link href="/shop/best-sellers">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer ">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer ">
                     Best Sellers
                   </div>
                 </Link>
                 <Link href="/shop/deals-of-the-week">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                     Deals of the week
                   </div>
                 </Link>
                 <Link href="/shop/new-releases">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                     New Releases
                   </div>
                 </Link>
@@ -124,32 +125,32 @@ const Navbar = () => {
                   Shop by Category
                 </h3>
                 <Link href="/shop/suits">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                     Suits
                   </div>
                 </Link>
                 <Link href="/shop/jackets">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                     Jackets
                   </div>
                 </Link>
                 <Link href="/shop/pants">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                     Pants
                   </div>
                 </Link>
                 <Link href="/shop/gloves">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                     Gloves
                   </div>
                 </Link>
                 <Link href="/shop/helmets">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                     Helmets
                   </div>
                 </Link>
                 <Link href="/shop/boots">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                     Boots
                   </div>
                 </Link>
@@ -159,22 +160,22 @@ const Navbar = () => {
                   Shop by Brands
                 </h3>
                 <Link href="/shop/brand/bmw">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                     BMW
                   </div>
                 </Link>
                 <Link href="/shop/brand/ktm">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                     KTM
                   </div>
                 </Link>
                 <Link href="/shop/brand/kawasaki">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                     Kawasaki
                   </div>
                 </Link>
                 <Link href="/shop/brand/royal-enfield">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                     Royal Enfield
                   </div>
                 </Link>
@@ -184,22 +185,22 @@ const Navbar = () => {
                   Help & Settings
                 </h3>
                 <Link href="/profile">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                     Your Account
                   </div>
                 </Link>
                 <Link href="/myorders">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                     Your Orders
                   </div>
                 </Link>
                 <Link href="/contactus">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                     Customer Service
                   </div>
                 </Link>
                 <Link href="/">
-                  <div className="py-2 my-1 pl-4 hover:bg-cust_gray cursor-pointer">
+                  <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                     Sign out
                   </div>
                 </Link>
@@ -208,7 +209,7 @@ const Navbar = () => {
           </div>
         </div>
       )}
-    </nav>
+    </>
   );
 };
 

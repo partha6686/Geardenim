@@ -1,12 +1,13 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { AiOutlineClose } from "react-icons/ai";
 
-const Card = () => {
+const CartCard = () => {
   return (
-    <div className="px-1 py-2 sm:p-4 lg:w-1/4 w-1/2">
-      <div className="w-full max-w-xs mx-auto rounded-lg shadow-lg border-2 border-cust_grey bg-cust_white">
-        <div className="relative text-center overflow-hidden h-60 w-full border-b-4 border-cust_light">
+    <div className="relative m-2">
+      <div className="flex flex-row bg-cust_white rounded-lg border-2 border-cust_grey shadow-md">
+        <div className="relative h-40 w-40 overflow-hidden m-2">
           <Image
             className=" w-full h-full"
             src="/product_1.jpg"
@@ -15,7 +16,7 @@ const Card = () => {
             objectFit="contain"
           />
         </div>
-        <div className="p-4  m-0 text-center">
+        <div className="flex-grow my-2">
           <p className="text-xs sm:text-base font-bold text-cust_green">
             Kawasaki
           </p>
@@ -24,13 +25,20 @@ const Card = () => {
               <a>Men's Formal Trousers</a>
             </Link>
           </h3>
+          <div className="float-left mr-3 cursor-pointer">Size: M</div>
+          <div className="">Qty: 1</div>
           <h2 className="text-xl font-semibold text-cust_dark my-1 sm:my-2">
-            ₹ 12000
+            ₹ 1200
           </h2>
+          <p className="text-cust_light_text">
+            Delivery By{" "}
+            <span className="text-cust_dark font-semibold">26 Jul 2022</span>
+          </p>
         </div>
+        <AiOutlineClose className="cursor-pointer text-xs sm:text-lg md:text-xl absolute right-3 top-2" />
       </div>
     </div>
   );
 };
 
-export default Card;
+export default CartCard;

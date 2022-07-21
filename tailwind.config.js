@@ -15,7 +15,7 @@ module.exports = {
       cust_light: "#f6f7fb",
       cust_blue: "#4F98CA",
       cust_light_text: "#5F7161",
-      cust_gray: "#EEEEEE",
+      cust_grey: "#eaeaec",
       cust_white: "#fff",
     },
   },
