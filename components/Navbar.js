@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BiSearch } from "react-icons/bi";
@@ -6,8 +6,15 @@ import { FiShoppingCart } from "react-icons/fi";
 import { FaUser } from "react-icons/fa";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
+import { CartContext } from "../store/CartState";
 
 const Navbar = () => {
+  const cartCtx = useContext(CartContext);
+
+  useEffect(() => {
+    cartCtx.getCart();
+  }, []);
+
   const ref = useRef();
   const [sidebar, setSidebar] = useState(false);
   const handleSidebar = () => {
@@ -57,16 +64,20 @@ const Navbar = () => {
                 </a>
               </Link>
             </div>
-            <div className="mx-3">
+            <div className="ml-3 mr-5 relative">
               <Link href="/cart">
                 <a>
                   <FiShoppingCart className="text-xl sm:text-2xl text-cust_dark hover:text-cust_green" />
                 </a>
               </Link>
+              <span className="text-cust_white bg-cust_green rounded-full text-xs font-semibold absolute -top-4 -right-4 px-2 py-1">
+                {cartCtx.cart.length}
+              </span>
             </div>
           </div>
         </div>
       </div>
+
       {/*SECONDARY NAV*/}
       <div className="flex justify-start px-1 md:px-5 py-1 text-xs sm:text-base space-x-1 bg-cust_green shadow-md">
         <div

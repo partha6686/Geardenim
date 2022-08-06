@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -6,8 +6,24 @@ import {
   AiFillPlusCircle,
   AiFillMinusCircle,
 } from "react-icons/ai";
+import { CartContext } from "../store/CartState";
 
-const CartCard = () => {
+const CartCard = (props) => {
+  const cartCtx = useContext(CartContext);
+  const { cartItem } = props;
+
+  const handleRemove = () => {
+    cartCtx.removeFromCart(cartItem);
+  };
+
+  const handleIncQty = () => {
+    cartCtx.addToCart(cartItem);
+  };
+
+  const handleDecQty = () => {
+    cartCtx.decProductQty(cartItem);
+  };
+
   return (
     <div className="relative m-2">
       <div className="flex flex-row bg-cust_white rounded-lg border-2 border-cust_grey shadow-md">
@@ -21,37 +37,52 @@ const CartCard = () => {
           />
         </div>
         <div className="flex-grow my-2">
-          <p className="text-xs font-semibold text-cust_light_text">Kawasaki</p>
+          <p className="text-xs font-semibold text-cust_light_text">
+            {cartItem.brand}
+          </p>
           <h3 className="text-sm sm:text-lg  text-cust_dark hover:text-cust_light_text mb-1">
             <Link href={"/product/mens-formal-trousers"}>
-              <a>Men's Formal Trousers</a>
+              <a>{cartItem.name}</a>
             </Link>
           </h3>
           <div className="flex flex-col sm:flex-row ">
-            <p className="mr-6">Size: M</p>
-            {/*<div className="flex items-center justify-center ml-2 text-lg font-semibold mr-8">
-              <BsFillArrowLeftCircleFill className="text-cust_green cursor-pointer" />
-              <span className="mx-1">M</span>
-              <BsFillArrowRightCircleFill className="text-cust_green cursor-pointer" />
-            </div>*/}
+            <p className="mr-6">Size: {cartItem.size}</p>
             <div className="flex">
               <p>Qty: </p>
               <div className="flex items-center justify-center mx-2 text-lg font-semibold">
-                <AiFillMinusCircle className="text-cust_green cursor-pointer text-xl" />
-                <span className="mx-2">1</span>
-                <AiFillPlusCircle className="text-cust_green cursor-pointer text-xl" />
+                <AiFillMinusCircle
+                  className="text-cust_green cursor-pointer text-xl"
+                  onClick={handleDecQty}
+                />
+                <span className="mx-2">{cartItem.qty}</span>
+                <AiFillPlusCircle
+                  className="text-cust_green cursor-pointer text-xl"
+                  onClick={handleIncQty}
+                />
               </div>
             </div>
           </div>
-          <h2 className="text-xl font-semibold text-cust_dark my-1 sm:my-2">
-            ₹ 1200
-          </h2>
+          <div className="my-3">
+            <h2 className="text-base sm:text-xl font-semibold text-cust_dark mb-1">
+              <span> ₹ {cartItem.qty * cartItem.price} </span>
+              <span className="mx-3 line-through text-cust_light_text">
+                ₹ {cartItem.qty * cartItem.mrp}
+              </span>
+              <span className="text-cust_blue">{cartItem.dis}% OFF</span>
+            </h2>
+            <p className="text-cust_green font-bold text-sm">
+              inclusive of all taxes
+            </p>
+          </div>
           <p className="text-cust_light_text">
             Delivery By{" "}
             <span className="text-cust_dark font-semibold">26 Jul 2022</span>
           </p>
         </div>
-        <AiOutlineClose className="cursor-pointer text-xs sm:text-lg md:text-xl absolute right-3 top-3" />
+        <AiOutlineClose
+          className="cursor-pointer text-xs sm:text-lg md:text-xl absolute right-3 top-3"
+          onClick={handleRemove}
+        />
       </div>
     </div>
   );

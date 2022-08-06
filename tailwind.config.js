@@ -18,6 +18,7 @@ module.exports = {
       cust_light_text: "#5F7161",
       cust_grey: "#eaeaec",
       cust_white: "#fff",
+      cust_red: "red",
     },
   },
   plugins: [],

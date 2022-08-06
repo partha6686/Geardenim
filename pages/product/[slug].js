@@ -1,15 +1,51 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 import { AiFillStar } from "react-icons/ai";
-import { BsFillCartCheckFill, BsTruck, BsFileText } from "react-icons/bs";
-import { MdOutlineDescription } from "react-icons/md";
+import {
+  BsFillCartCheckFill,
+  BsTruck,
+  BsFileText,
+  BsCheckCircleFill,
+  BsXCircleFill,
+} from "react-icons/bs";
+import { CartContext } from "../../store/CartState";
 
 const Product = () => {
+  const cartCtx = useContext(CartContext);
   const router = useRouter();
   const { slug } = router.query;
+  const [pin, setPin] = useState();
+  const [checkDelivery, setCheckDelivery] = useState(null);
+  const handlePinChange = (e) => {
+    setPin(e.target.value);
+  };
+  const handleCheckPin = async () => {
+    const pins = await fetch("http://localhost:3000/api/pincode");
+    const pinsJson = await pins.json();
+    if (pinsJson.includes(parseInt(pin))) {
+      setCheckDelivery(true);
+    } else {
+      setCheckDelivery(false);
+    }
+  };
 
+  const handleAddToCart = () => {
+    const product = {
+      id: "507f1f77bcf86cd799439011",
+      pImg: "http://localhost:3000/_next/image?url=%2Fproduct_1.jpg&w=828&q=75",
+      brand: "Kawasaki",
+      name: "The Catcher in the Rye 1",
+      size: "M",
+      qty: 1,
+      mrp: 999,
+      price: 499,
+      dis: 55,
+    };
+    cartCtx.addToCart(product);
+    console.log("added");
+  };
   return (
     <>
       <section className=" body-font overflow-hidden">
@@ -53,14 +89,6 @@ const Product = () => {
                   inclusive of all taxes
                 </p>
               </div>
-              {/*<p className="leading-relaxed">
-                Fam locavore kickstarter distillery. Mixtape chillwave tumeric
-                sriracha taximy chia microdosing tilde DIY. XOXO fam indxgo
-                juiceramps cornhole raw denim forage brooklyn. Everyday carry +1
-                seitan poutine tumeric. Gastropub blue bottle austin listicle
-                pour-over, neutra jean shorts keytar banjo tattooed umami
-                cardigan.
-              </p>*/}
               <div className="flex mt-6 items-center pb-5 mb-5">
                 <div className="flex items-center">
                   <span className="mr-3 font-semibold text-base sm:text-lg">
@@ -92,12 +120,13 @@ const Product = () => {
                 </div>
               </div>
               <div className=" border-b-2 border-cust_grey ">
-                <Link href={"/cart"}>
-                  <button className="w-full h-11 bg-cust_green my-3 text-cust_white font-semibold flex justify-center items-center">
-                    <BsFillCartCheckFill className="text-lg mx-1" />
-                    <p>ADD TO CART</p>
-                  </button>
-                </Link>
+                <button
+                  className="w-full h-11 bg-cust_green my-3 text-cust_white font-semibold flex justify-center items-center"
+                  onClick={handleAddToCart}
+                >
+                  <BsFillCartCheckFill className="text-lg mx-1" />
+                  <p>ADD TO CART</p>
+                </button>
               </div>
               <div>
                 <h2 className="mr-3 mt-3 mb-2 font-semibold text-base sm:text-lg flex items-center text-cust_dark">
@@ -109,14 +138,34 @@ const Product = () => {
                     type="tel"
                     id="pincode"
                     name="pincode"
+                    onChange={handlePinChange}
                     className="w-full bg-cust_white text-base outline-none text-cust_dark py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                   />
-                  <span className="text-cust_green">Check </span>
+                  <span
+                    className="text-cust_green cursor-pointer"
+                    onClick={handleCheckPin}
+                  >
+                    Check{" "}
+                  </span>
                 </div>
-                <div className="text-sm text-cust_light_text leading-8">
-                  Please enter PIN code to check delivery time & Pay on Delivery
-                  Availability
-                </div>
+                {checkDelivery === null && (
+                  <div className="text-sm text-cust_light_text mt-3">
+                    Please enter PIN code to check delivery time & Pay on
+                    Delivery Availability
+                  </div>
+                )}
+                {checkDelivery && (
+                  <div className="text-sm text-cust_green flex items-center mt-3">
+                    <BsCheckCircleFill className="mr-2" />
+                    Yahh! We deliver to this location
+                  </div>
+                )}
+                {!checkDelivery && checkDelivery !== null && (
+                  <div className="text-sm text-cust_red flex items-center mt-3">
+                    <BsXCircleFill className="mr-2" />
+                    Sorry! We do not deliver to this location yet.
+                  </div>
+                )}
               </div>
               <div>
                 <h2 className="mr-3 mt-3 mb-2 font-semibold text-base sm:text-lg flex items-center text-cust_dark">
