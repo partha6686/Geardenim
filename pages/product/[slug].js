@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import Link from "next/link";
 import { AiFillStar } from "react-icons/ai";
 import {
   BsFillCartCheckFill,

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 import CartCard from "../components/CartCard";
 import { BsBagCheckFill } from "react-icons/bs";

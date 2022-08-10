@@ -5,7 +5,7 @@ import { BiSearch } from "react-icons/bi";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaUser } from "react-icons/fa";
 import { HiMenuAlt2 } from "react-icons/hi";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineUser } from "react-icons/ai";
 import { CartContext } from "../store/CartState";
 
 const Navbar = () => {
@@ -60,7 +60,7 @@ const Navbar = () => {
             <div className="mx-3">
               <Link href="/signin">
                 <a>
-                  <FaUser className="text-xl sm:text-2xl text-cust_dark hover:text-cust_green" />
+                  <AiOutlineUser className="text-xl sm:text-2xl text-cust_dark hover:text-cust_green" />
                 </a>
               </Link>
             </div>

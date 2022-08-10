@@ -26,7 +26,7 @@ const CartCard = (props) => {
 
   return (
     <div className="relative m-2">
-      <div className="flex flex-row bg-cust_white rounded-lg border-2 border-cust_grey shadow-md">
+      <div className="flex flex-row bg-white rounded-lg border-2 border-gray-300 shadow-md">
         <div className="relative h-40 w-40 overflow-hidden m-2">
           <Image
             className=" w-full h-full"
