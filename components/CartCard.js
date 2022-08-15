@@ -11,7 +11,6 @@ import { CartContext } from "../store/CartState";
 const CartCard = (props) => {
   const cartCtx = useContext(CartContext);
   const { cartItem } = props;
-
   const handleRemove = () => {
     cartCtx.removeFromCart(cartItem);
   };
@@ -30,7 +29,7 @@ const CartCard = (props) => {
         <div className="relative h-40 w-40 overflow-hidden m-2">
           <Image
             className=" w-full h-full"
-            src="/product_1.jpg"
+            src={cartItem.pImg}
             alt="product"
             layout="fill"
             objectFit="contain"
@@ -41,7 +40,7 @@ const CartCard = (props) => {
             {cartItem.brand}
           </p>
           <h3 className="text-sm sm:text-lg  text-cust_dark hover:text-cust_light_text mb-1">
-            <Link href={"/product/mens-formal-trousers"}>
+            <Link href={`/product/${cartItem.slug}`}>
               <a>{cartItem.name}</a>
             </Link>
           </h3>

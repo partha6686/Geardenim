@@ -1,9 +1,11 @@
 import { createContext } from "react";
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 
 export const CartContext = createContext();
 
 const CartState = (props) => {
+  const router = useRouter();
   const [cart, setCart] = useState([]);
   const [totalAmt, setTotalAmt] = useState({
     mrpAmt: 0,
@@ -38,9 +40,9 @@ const CartState = (props) => {
 
   const addToCart = (product) => {
     let cartItems = [...cart];
-    if (cartItems.find((item) => item.id === product.id)) {
+    if (cartItems.find((item) => item.id === product.id && item.size === product.size)) {
       cartItems.map((item) => {
-        if (item.id === product.id) {
+        if (item.id === product.id && item.size === product.size) {
           item.qty += 1;
         }
         return item;
@@ -56,7 +58,7 @@ const CartState = (props) => {
 
   const removeFromCart = (product) => {
     let cartItems = [...cart];
-    cartItems = cartItems.filter((item) => item.id !== product.id);
+    cartItems = cartItems.filter((item) => !(item.id === product.id && item.size === product.size));
     setCart([...cartItems]);
     localStorage.setItem("geardenim_cart", JSON.stringify(cartItems));
     calcAmount(cartItems);
@@ -64,9 +66,9 @@ const CartState = (props) => {
 
   const decProductQty = (product) => {
     let cartItems = [...cart];
-    if (cartItems.find((item) => item.id === product.id).qty > 1) {
+    if (cartItems.find((item) => item.id === product.id && item.size === product.size).qty > 1) {
       cartItems.map((item) => {
-        if (item.id === product.id) {
+        if (item.id === product.id && item.size === product.size) {
           item.qty = item.qty - 1;
         }
         return item;
@@ -83,6 +85,16 @@ const CartState = (props) => {
     calcAmount([]);
   };
 
+  const buyNow = (product) =>{
+   setCart([]); 
+   localStorage.setItem("geardenim_cart", null);
+    let cartItem = [product];
+    setCart(cartItem);
+    localStorage.setItem("geardenim_cart", JSON.stringify(cartItem));
+    calcAmount(cartItem);
+    router.push('/checkout');
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -94,6 +106,7 @@ const CartState = (props) => {
         removeFromCart,
         decProductQty,
         clearCart,
+        buyNow
       }}
     >
       {props.children}

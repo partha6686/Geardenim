@@ -7,9 +7,6 @@ import { CartContext } from "../store/CartState";
 const Cart = () => {
   const cartCtx = useContext(CartContext);
 
-  // useEffect(() => {
-  //   cartCtx.calcAmount();
-  // }, [cartCtx.totalAmt]);
 
   return (
     <div className="bg-cust_light ">
