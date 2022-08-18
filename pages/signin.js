@@ -1,13 +1,48 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { AiOutlineLogin } from "react-icons/ai";
+import { UserContext } from "../store/UserState";
 
 const Signin = () => {
+  const userCtx = useContext(UserContext);
+  const router = useRouter();
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+  const handleChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch(`${process.env.HOST}login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: user.email,
+        password: user.password,
+      }),
+    });
+    const json = await response.json();
+    if (response.status === 200) {
+      userCtx.setIsLogedIn(true);
+      router.push("/");
+    } else {
+      userCtx.setIsLogedIn(false);
+    }
+    console.log(json);
+  };
+
   return (
     <div>
       <div className="h-screen flex justify-center items-center bg-gray-50">
         <form
+          onSubmit={handleSubmit}
           className="w-11/12 sm:w-4/6 md:w-3/6 max-w-md px-6 sm:px-10 py-10 bg-white rounded-xl drop-shadow-lg"
           autoComplete="off"
         >
@@ -36,6 +71,8 @@ const Signin = () => {
               placeholder="Your Email"
               name="email"
               id="email"
+              onChange={handleChange}
+              value={user.email}
             />
           </div>
           <div className="my-4">
@@ -45,6 +82,8 @@ const Signin = () => {
               placeholder="Your Password"
               name="password"
               id="password"
+              onChange={handleChange}
+              value={user.password}
             />
           </div>
 

@@ -2,6 +2,7 @@ import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import "../styles/globals.css";
 import CartState from "../store/CartState";
+import UserState from "../store/UserState";
 import { useRouter } from "next/router";
 
 function MyApp({ Component, pageProps }) {
@@ -13,11 +14,13 @@ function MyApp({ Component, pageProps }) {
       ? false
       : true;
   return (
-    <CartState>
-      {showHeader && <Navbar />}
-      <Component {...pageProps} />
-      {showHeader && <Footer />}
-    </CartState>
+    <UserState>
+      <CartState>
+        {showHeader && <Navbar />}
+        <Component {...pageProps} />
+        {showHeader && <Footer />}
+      </CartState>
+    </UserState>
   );
 }
 

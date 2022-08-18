@@ -1,12 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const Signup = () => {
+  const router = useRouter();
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirm_password: "",
+  });
+
+  const handleChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch(`${process.env.HOST}signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: user.name,
+        email: user.email,
+        password: user.password,
+      }),
+    });
+    const json = await response.json();
+    if (response.status === 200) {
+      router.push("/");
+    }
+    console.log(json);
+  };
+
   return (
     <div>
       <div className="h-screen flex justify-center items-center bg-gray-50">
         <form
+          onSubmit={handleSubmit}
           className="w-11/12 sm:w-4/6 md:w-3/6 max-w-md px-6 sm:px-10 py-10 bg-white rounded-xl drop-shadow-lg"
           autoComplete="off"
         >
@@ -34,6 +68,8 @@ const Signup = () => {
               placeholder="Your Name"
               name="name"
               id="name"
+              onChange={handleChange}
+              value={user.name}
             />
           </div>
           <div className="my-4">
@@ -43,6 +79,8 @@ const Signup = () => {
               placeholder="Your Email"
               name="email"
               id="email"
+              onChange={handleChange}
+              value={user.email}
             />
           </div>
           <div className="my-4">
@@ -52,6 +90,8 @@ const Signup = () => {
               placeholder="Your Password"
               name="password"
               id="password"
+              onChange={handleChange}
+              value={user.password}
             />
           </div>
 
@@ -62,6 +102,8 @@ const Signup = () => {
               placeholder="Confirm Password"
               name="confirm_password"
               id="confirm_password"
+              onChange={handleChange}
+              value={user.confirm_password}
             />
           </div>
 

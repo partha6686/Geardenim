@@ -7,12 +7,16 @@ import { FaUser } from "react-icons/fa";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { AiOutlineClose, AiOutlineUser } from "react-icons/ai";
 import { CartContext } from "../store/CartState";
+import { UserContext } from "../store/UserState";
 
 const Navbar = () => {
+  const [dropdown, setDropdown] = useState(false);
   const cartCtx = useContext(CartContext);
+  const userCtx = useContext(UserContext);
 
   useEffect(() => {
     cartCtx.getCart();
+    userCtx.fetchUser();
   }, []);
 
   const ref = useRef();
@@ -27,7 +31,6 @@ const Navbar = () => {
       ref.current.classList.add("-translate-x-full");
     }
   };
-
   return (
     <>
       <div className="sticky top-0 left-0 right-0 z-20 shadow-lg">
@@ -46,7 +49,7 @@ const Navbar = () => {
           </div>
           <div className="hidden sm:flex h-10 mx-5 flex-grow bg-cust_green rounded-md cursor-pointer items-center">
             <input
-              className="flex-grow focus:outline-none h-full bg-cust_grey rounded-l-md px-2"
+              className="flex-grow focus:outline-none h-full bg-gray-200 rounded-l-md px-2"
               type="text"
               name="search"
               id="search"
@@ -56,13 +59,70 @@ const Navbar = () => {
               <BiSearch className="text-2xl" />
             </div>
           </div>
-          <div className="flex">
-            <div className="mx-3">
-              <Link href="/signin">
-                <a>
-                  <AiOutlineUser className="text-xl sm:text-2xl text-cust_dark hover:text-cust_green" />
-                </a>
-              </Link>
+          <div className="flex relative">
+          {userCtx.isLogedIn && <div
+              className="bg-transparent absolute -top-2 left-0 w-12 h-14 z-40 cursor-pointer"
+              onMouseMove={() => setDropdown(true)}
+              onMouseLeave={() => setDropdown(false)}
+            ></div>}
+            <div className="mx-3 relative">
+              {userCtx.isLogedIn ? (
+                <div className="cursor-pointer relative">
+                  <AiOutlineUser className="text-xl sm:text-2xl text-cust_dark" />
+                </div>
+              ) : (
+                <Link href="/signin">
+                  <a className="text-sm font-semibold px-2 sm:px-3 py-1 sm:py-2 border-2 border-cust_green hover:text-white hover:bg-cust_green">
+                    LOGIN
+                  </a>
+                </Link>
+              )}
+              {userCtx.isLogedIn && dropdown && (
+                <div
+                  className="bg-emerald-50 absolute top-12 -right-4 w-52 py-2 rounded-md shadow-[0_0_20px_-5px_rgb(0,0,0,0.1)] outline-offset-0"
+                  onMouseMove={() => setDropdown(true)}
+                  onMouseLeave={() => setDropdown(false)}
+                >
+                  <div className="border-b-2 border-emerald-100 px-4 pb-2 cursor-pointer">
+                    <Link href={"/profile"} passHref={true}>
+                      <div>
+                        <div className="font-semibold">
+                          Hello {userCtx.user.name.split(" ")[0]}
+                        </div>
+                        <div className="text-sm leading-3">
+                          {userCtx.user.email}
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                  <div className="px-4 hover:bg-white  leading-8">
+                    <Link href={"/myorders"}>Orders</Link>
+                  </div>
+                  <div className="px-4 hover:bg-white  leading-8">
+                    <Link href={"/cart"}>Cart</Link>
+                  </div>
+                  <div className="px-4 hover:bg-white border-b-2 border-emerald-100 leading-8">
+                    <Link href={"/contactus"}>Contact Us</Link>
+                  </div>
+
+                  <div className="px-4 hover:bg-white  leading-8">
+                    <Link href={"/coupons"}>Coupons</Link>
+                  </div>
+                  <div className="px-4 hover:bg-white  leading-8">
+                    <Link href={"/myaddress"}>Saved Addresses</Link>
+                  </div>
+                  <div className="px-4 hover:bg-white border-b-2 border-emerald-100 leading-8">
+                    <Link href={"/mycards"}>Saved Cards</Link>
+                  </div>
+
+                  <div
+                    className="px-4 hover:bg-white text-cust_green font-bold leading-8"
+                    onClick={() => userCtx.logout()}
+                  >
+                    Logout
+                  </div>
+                </div>
+              )}
             </div>
             <div className="ml-3 mr-5 relative">
               <Link href="/cart">
