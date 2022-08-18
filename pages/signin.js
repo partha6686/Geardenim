@@ -30,10 +30,10 @@ const Signin = () => {
     });
     const json = await response.json();
     if (response.status === 200) {
-      userCtx.setIsLogedIn(true);
+      userCtx.setIsLoggedIn(true);
       router.push("/");
     } else {
-      userCtx.setIsLogedIn(false);
+      userCtx.setIsLoggedIn(false);
     }
     console.log(json);
   };

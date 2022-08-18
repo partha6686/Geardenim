@@ -22,13 +22,21 @@ const handler = async (req, res) => {
           },
         };
         const authToken = jwt.sign(data, process.env.JWT_SECRET);
-        res.setHeader("Set-Cookie", cookie.serialize("authToken", authToken,{
-          httpOnly: true,
-          secure: process.env.NODE_ENV != "developement",
-          maxAge: 60*60*24*2,
-          sameSite: true,
-          path: "/",
-        }));
+        res.setHeader("Set-Cookie", [
+          cookie.serialize("authToken", authToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV != "developement",
+            maxAge: 60 * 60 * 24 * 2,
+            sameSite: true,
+            path: "/",
+          }),
+          cookie.serialize("isLoggedIn", true, {
+            secure: process.env.NODE_ENV != "developement",
+            maxAge: 60 * 60 * 24 * 2,
+            sameSite: true,
+            path: "/",
+          }),
+        ]);
         res.status(200).json({ msg: "Login Successful" });
       });
     } else {

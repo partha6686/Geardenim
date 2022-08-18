@@ -1,3 +1,4 @@
+import React, { useContext, useEffect } from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import "../styles/globals.css";
@@ -7,6 +8,7 @@ import { useRouter } from "next/router";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
+
   const showHeader =
     router.pathname === "/signin" ||
     router.pathname === "/signup" ||
@@ -16,9 +18,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <UserState>
       <CartState>
-        {showHeader && <Navbar />}
-        <Component {...pageProps} />
-        {showHeader && <Footer />}
+            {showHeader && <Navbar />}
+            <Component {...pageProps} />
+            {showHeader && <Footer />}
       </CartState>
     </UserState>
   );

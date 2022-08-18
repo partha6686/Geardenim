@@ -6,7 +6,7 @@ export const UserContext = createContext();
 
 const CartState = (props) => {
   const [user, setUser] = useState({});
-  const [isLogedIn, setIsLogedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const fetchUser = async () => {
     const response = await fetch(`${process.env.HOST}getuser`, {
@@ -18,10 +18,10 @@ const CartState = (props) => {
     const json = await response.json();
 
     if (response.status === 200) {
-      setIsLogedIn(true);
+      setIsLoggedIn(true);
       setUser(json);
     } else {
-      setIsLogedIn(false);
+      setIsLoggedIn(false);
       console.log(json);
     }
   };
@@ -33,7 +33,7 @@ const CartState = (props) => {
     const json = await response.json();
 
     if (response.status === 200) {
-      setIsLogedIn(false);
+      setIsLoggedIn(false);
       setUser({});
     }
     console.log(json);
@@ -41,7 +41,7 @@ const CartState = (props) => {
 
   return (
     <UserContext.Provider
-      value={{ user, isLogedIn, setIsLogedIn, fetchUser, logout }}
+      value={{ user, isLoggedIn, setIsLoggedIn, fetchUser, logout }}
     >
       {props.children}
     </UserContext.Provider>

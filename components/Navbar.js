@@ -3,11 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { BiSearch } from "react-icons/bi";
 import { FiShoppingCart } from "react-icons/fi";
-import { FaUser } from "react-icons/fa";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { AiOutlineClose, AiOutlineUser } from "react-icons/ai";
 import { CartContext } from "../store/CartState";
 import { UserContext } from "../store/UserState";
+import { getCookie } from "cookies-next";
 
 const Navbar = () => {
   const [dropdown, setDropdown] = useState(false);
@@ -16,8 +16,14 @@ const Navbar = () => {
 
   useEffect(() => {
     cartCtx.getCart();
+    // console.log("isLoggedIn", getCookie("isLoggedIn"));
+    if (getCookie("isLoggedIn") == true) {
+      userCtx.setIsLoggedIn(true);
+    } else {
+      userCtx.setIsLoggedIn(false);
+    }
     userCtx.fetchUser();
-  }, []);
+  }, [getCookie("isLoggedIn")]);
 
   const ref = useRef();
   const [sidebar, setSidebar] = useState(false);
@@ -60,13 +66,15 @@ const Navbar = () => {
             </div>
           </div>
           <div className="flex relative">
-          {userCtx.isLogedIn && <div
-              className="bg-transparent absolute -top-2 left-0 w-12 h-14 z-40 cursor-pointer"
-              onMouseMove={() => setDropdown(true)}
-              onMouseLeave={() => setDropdown(false)}
-            ></div>}
+            {userCtx.isLoggedIn && (
+              <div
+                className="bg-transparent absolute -top-2 left-0 w-12 h-14 z-40 cursor-pointer"
+                onMouseMove={() => setDropdown(true)}
+                onMouseLeave={() => setDropdown(false)}
+              ></div>
+            )}
             <div className="mx-3 relative">
-              {userCtx.isLogedIn ? (
+              {userCtx.isLoggedIn ? (
                 <div className="cursor-pointer relative">
                   <AiOutlineUser className="text-xl sm:text-2xl text-cust_dark" />
                 </div>
@@ -77,7 +85,7 @@ const Navbar = () => {
                   </a>
                 </Link>
               )}
-              {userCtx.isLogedIn && dropdown && (
+              {userCtx.isLoggedIn && dropdown && (
                 <div
                   className="bg-emerald-50 absolute top-12 -right-4 w-52 py-2 rounded-md shadow-[0_0_20px_-5px_rgb(0,0,0,0.1)] outline-offset-0"
                   onMouseMove={() => setDropdown(true)}
@@ -89,34 +97,34 @@ const Navbar = () => {
                         <div className="font-semibold">
                           Hello {userCtx.user.name.split(" ")[0]}
                         </div>
-                        <div className="text-sm leading-3">
+                        <div className="text-sm leading-3 cursor-pointer">
                           {userCtx.user.email}
                         </div>
                       </div>
                     </Link>
                   </div>
-                  <div className="px-4 hover:bg-white  leading-8">
+                  <div className="px-4 hover:bg-white  leading-8 cursor-pointer">
                     <Link href={"/myorders"}>Orders</Link>
                   </div>
-                  <div className="px-4 hover:bg-white  leading-8">
+                  <div className="px-4 hover:bg-white  leading-8 cursor-pointer">
                     <Link href={"/cart"}>Cart</Link>
                   </div>
-                  <div className="px-4 hover:bg-white border-b-2 border-emerald-100 leading-8">
+                  <div className="px-4 hover:bg-white border-b-2 border-emerald-100 leading-8 cursor-pointer">
                     <Link href={"/contactus"}>Contact Us</Link>
                   </div>
 
-                  <div className="px-4 hover:bg-white  leading-8">
+                  <div className="px-4 hover:bg-white  leading-8 cursor-pointer">
                     <Link href={"/coupons"}>Coupons</Link>
                   </div>
-                  <div className="px-4 hover:bg-white  leading-8">
+                  <div className="px-4 hover:bg-white  leading-8 cursor-pointer">
                     <Link href={"/myaddress"}>Saved Addresses</Link>
                   </div>
-                  <div className="px-4 hover:bg-white border-b-2 border-emerald-100 leading-8">
+                  <div className="px-4 hover:bg-white border-b-2 border-emerald-100 leading-8 cursor-pointer">
                     <Link href={"/mycards"}>Saved Cards</Link>
                   </div>
 
                   <div
-                    className="px-4 hover:bg-white text-cust_green font-bold leading-8"
+                    className="px-4 hover:bg-white text-cust_green font-bold leading-8 cursor-pointer "
                     onClick={() => userCtx.logout()}
                   >
                     Logout
