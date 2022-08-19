@@ -31,7 +31,7 @@ const Signup = () => {
     });
     const json = await response.json();
     if (response.status === 200) {
-      router.push("/login");
+      router.push("/signin");
     }
     console.log(json);
   };

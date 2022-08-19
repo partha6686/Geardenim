@@ -47,8 +47,8 @@ const Navbar = () => {
                 <Image
                   src="/logo.jpg"
                   alt="geardenim-logo"
-                  width={200}
-                  height={50}
+                  width={180}
+                  height={40}
                 />
               </a>
             </Link>
@@ -66,82 +66,96 @@ const Navbar = () => {
             </div>
           </div>
           <div className="flex relative">
-            {userCtx.isLoggedIn && (
-              <div
-                className="bg-transparent absolute -top-2 left-0 w-12 h-14 z-40 cursor-pointer"
-                onMouseMove={() => setDropdown(true)}
-                onMouseLeave={() => setDropdown(false)}
-              ></div>
-            )}
+            <div
+              className="bg-transparent absolute -top-2 left-0 w-12 h-14 z-40 cursor-pointer"
+              onMouseMove={() => setDropdown(true)}
+              onMouseLeave={() => setDropdown(false)}
+            ></div>
             <div className="mx-3 relative">
-              {userCtx.isLoggedIn ? (
-                <div className="cursor-pointer relative">
-                  <AiOutlineUser className="text-xl sm:text-2xl text-cust_dark" />
-                </div>
-              ) : (
-                <Link href="/signin">
-                  <a className="text-sm font-semibold px-2 sm:px-3 py-1 sm:py-2 border-2 border-cust_green hover:text-white hover:bg-cust_green">
-                    LOGIN
-                  </a>
-                </Link>
-              )}
-              {userCtx.isLoggedIn && dropdown && (
+              <div className="cursor-pointer relative ">
+                <AiOutlineUser className="text-xl mx-auto " />
+                <p className="font-bold text-xs">Profile</p>
+              </div>
+              {dropdown && (
                 <div
-                  className="bg-emerald-50 absolute top-12 -right-4 w-52 py-2 rounded-md shadow-[0_0_20px_-5px_rgb(0,0,0,0.1)] outline-offset-0"
+                  className={
+                    "bg-white border border-cust_green absolute top-12 -right-4 w-52 py-2 rounded-md shadow-[0_0_20px_-5px_rgb(0,0,0,0.1)] outline-offset-0 text-gray-600"
+                  }
                   onMouseMove={() => setDropdown(true)}
                   onMouseLeave={() => setDropdown(false)}
                 >
                   <div className="border-b-2 border-emerald-100 px-4 pb-2 cursor-pointer">
-                    <Link href={"/profile"} passHref={true}>
-                      <div>
-                        <div className="font-semibold">
-                          Hello {userCtx.user.name.split(" ")[0]}
+                    {userCtx.isLoggedIn ? (
+                      <Link href={"/profile"} passHref={true}>
+                        <div>
+                          <div className="font-semibold text-black">
+                            Hello{" "}
+                            {userCtx.user.name &&
+                              userCtx.user.name.split(" ")[0]}
+                          </div>
+                          <div className="text-sm leading-3">
+                            {userCtx.user.email && userCtx.user.email}
+                          </div>
                         </div>
-                        <div className="text-sm leading-3 cursor-pointer">
-                          {userCtx.user.email}
+                      </Link>
+                    ) : (
+                      <Link href="/signin">
+                        <div>
+                          <div className="font-semibold text-black">
+                            Welcome
+                          </div>
+                          <div className="text-sm leading-3 cursor-pointer">
+                            To access account and manage orders
+                          </div>
+                          <div className="text-sm font-semibold px-2 py-1 mt-2 border-2  text-cust_green hover:border-cust_green inline-block">
+                            LOGIN / SIGNUP
+                          </div>
                         </div>
-                      </div>
-                    </Link>
+                      </Link>
+                    )}
                   </div>
-                  <div className="px-4 hover:bg-white  leading-8 cursor-pointer">
+                  <div className="px-4 hover:bg-cust_green hover:text-white  leading-8 cursor-pointer">
                     <Link href={"/myorders"}>Orders</Link>
                   </div>
-                  <div className="px-4 hover:bg-white  leading-8 cursor-pointer">
+                  <div className="px-4 hover:bg-cust_green hover:text-white  leading-8 cursor-pointer">
                     <Link href={"/cart"}>Cart</Link>
                   </div>
-                  <div className="px-4 hover:bg-white border-b-2 border-emerald-100 leading-8 cursor-pointer">
+                  <div className="px-4 hover:bg-cust_green hover:text-white border-b-2 border-emerald-100 leading-8 cursor-pointer">
                     <Link href={"/contactus"}>Contact Us</Link>
                   </div>
 
-                  <div className="px-4 hover:bg-white  leading-8 cursor-pointer">
+                  <div className="px-4 hover:bg-cust_green hover:text-white  leading-8 cursor-pointer">
                     <Link href={"/coupons"}>Coupons</Link>
                   </div>
-                  <div className="px-4 hover:bg-white  leading-8 cursor-pointer">
+                  <div className="px-4 hover:bg-cust_green hover:text-white  leading-8 cursor-pointer">
                     <Link href={"/myaddress"}>Saved Addresses</Link>
                   </div>
-                  <div className="px-4 hover:bg-white border-b-2 border-emerald-100 leading-8 cursor-pointer">
+                  <div className="px-4 hover:bg-cust_green hover:text-white leading-8 cursor-pointer">
                     <Link href={"/mycards"}>Saved Cards</Link>
                   </div>
 
-                  <div
-                    className="px-4 hover:bg-white text-cust_green font-bold leading-8 cursor-pointer "
-                    onClick={() => userCtx.logout()}
-                  >
-                    Logout
-                  </div>
+                  {userCtx.isLoggedIn && (
+                    <div
+                      className="px-4 hover:bg-cust_green hover:text-white text-cust_green font-semibold leading-8 cursor-pointer border-t-2 border-emerald-100"
+                      onClick={() => userCtx.logout()}
+                    >
+                      LOGOUT
+                    </div>
+                  )}
                 </div>
               )}
             </div>
-            <div className="ml-3 mr-5 relative">
-              <Link href="/cart">
-                <a>
-                  <FiShoppingCart className="text-xl sm:text-2xl text-cust_dark hover:text-cust_green" />
-                </a>
-              </Link>
-              <span className="text-cust_white bg-cust_green rounded-full text-xs font-semibold absolute -top-4 -right-4 px-2 py-1">
-                {cartCtx.cart.length}
-              </span>
-            </div>
+            <Link href="/cart">
+              <div className="ml-3 mr-5 relative cursor-pointer">
+                <div>
+                  <FiShoppingCart className="text-xl mx-auto " />
+                </div>
+                <span className="text-cust_white bg-cust_green rounded-full text-xs font-semibold absolute px-1 -top-2 left-4">
+                  {cartCtx.cart.length}
+                </span>
+                <p className="font-bold text-xs">Cart</p>
+              </div>
+            </Link>
           </div>
         </div>
       </div>
