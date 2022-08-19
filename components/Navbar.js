@@ -150,7 +150,7 @@ const Navbar = () => {
                 <div>
                   <FiShoppingCart className="text-xl mx-auto " />
                 </div>
-                <span className="text-cust_white bg-cust_green rounded-full text-xs font-semibold absolute px-1 -top-2 left-4">
+                <span className="text-cust_white bg-rose-600 rounded-full text-xs font-semibold absolute px-1 -top-2 left-4">
                   {cartCtx.cart.length}
                 </span>
                 <p className="font-bold text-xs">Cart</p>
