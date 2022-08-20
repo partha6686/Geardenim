@@ -1,13 +1,19 @@
-import React from "react";
+import Reac, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { BsDownload } from "react-icons/bs";
-import Link from "next/link";
-import Image from "next/image";
 import OrderCard from "../../components/OrderCard";
+import { getCookie } from "cookies-next";
 
 const OrderId = () => {
   const router = useRouter();
   const { id } = router.query;
+
+  useEffect(() => {
+    if (getCookie("isLoggedIn") !== true) {
+      router.push("/signin");
+    }
+  }, []);
+
   return (
     <div className="bg-gray-50 py-4">
       <div className="container lg:px-24 mx-auto">

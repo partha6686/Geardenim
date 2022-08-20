@@ -1,9 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { AiOutlineLogin } from "react-icons/ai";
 import { UserContext } from "../store/UserState";
+import { getCookie } from "cookies-next";
 
 const Signin = () => {
   const userCtx = useContext(UserContext);
@@ -12,6 +13,14 @@ const Signin = () => {
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    if (getCookie("isLoggedIn") == true) {
+      router.push("/");
+    }
+  }, [])
+  
+
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };

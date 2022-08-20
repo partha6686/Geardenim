@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { getCookie } from "cookies-next";
 
 const Signup = () => {
   const router = useRouter();
@@ -11,6 +12,12 @@ const Signup = () => {
     password: "",
     confirm_password: "",
   });
+
+  useEffect(() => {
+    if (getCookie("isLoggedIn") == true) {
+      router.push("/");
+    }
+  }, [])
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });

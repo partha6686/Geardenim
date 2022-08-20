@@ -16,7 +16,6 @@ const Navbar = () => {
 
   useEffect(() => {
     cartCtx.getCart();
-    // console.log("isLoggedIn", getCookie("isLoggedIn"));
     if (getCookie("isLoggedIn") == true) {
       userCtx.setIsLoggedIn(true);
     } else {
@@ -99,40 +98,50 @@ const Navbar = () => {
                         </div>
                       </Link>
                     ) : (
-                      <Link href="/signin">
-                        <div>
-                          <div className="font-semibold text-black">
-                            Welcome
-                          </div>
-                          <div className="text-sm leading-3 cursor-pointer">
-                            To access account and manage orders
-                          </div>
+                      <div>
+                        <div className="font-semibold text-black">Welcome</div>
+                        <div className="text-sm leading-3 cursor-pointer">
+                          To access account and manage orders
+                        </div>
+                        <Link href="/signin">
                           <div className="text-sm font-semibold px-2 py-1 mt-2 border-2  text-cust_green hover:border-cust_green inline-block">
                             LOGIN / SIGNUP
                           </div>
-                        </div>
-                      </Link>
+                        </Link>
+                      </div>
                     )}
                   </div>
-                  <div className="px-4 hover:bg-cust_green hover:text-white  leading-8 cursor-pointer">
-                    <Link href={"/myorders"}>Orders</Link>
-                  </div>
-                  <div className="px-4 hover:bg-cust_green hover:text-white  leading-8 cursor-pointer">
-                    <Link href={"/cart"}>Cart</Link>
-                  </div>
-                  <div className="px-4 hover:bg-cust_green hover:text-white border-b-2 border-emerald-100 leading-8 cursor-pointer">
-                    <Link href={"/contactus"}>Contact Us</Link>
-                  </div>
+                  <Link href={"/myorders"}>
+                    <div className="px-4 hover:bg-cust_green hover:text-white  leading-8 cursor-pointer">
+                      Orders
+                    </div>
+                  </Link>
+                  <Link href={"/cart"}>
+                    <div className="px-4 hover:bg-cust_green hover:text-white  leading-8 cursor-pointer">
+                      Cart
+                    </div>
+                  </Link>
+                  <Link href={"/contactus"}>
+                    <div className="px-4 hover:bg-cust_green hover:text-white border-b-2 border-emerald-100 leading-8 cursor-pointer">
+                      Contact Us
+                    </div>
+                  </Link>
 
-                  <div className="px-4 hover:bg-cust_green hover:text-white  leading-8 cursor-pointer">
-                    <Link href={"/coupons"}>Coupons</Link>
-                  </div>
-                  <div className="px-4 hover:bg-cust_green hover:text-white  leading-8 cursor-pointer">
-                    <Link href={"/myaddress"}>Saved Addresses</Link>
-                  </div>
-                  <div className="px-4 hover:bg-cust_green hover:text-white leading-8 cursor-pointer">
-                    <Link href={"/mycards"}>Saved Cards</Link>
-                  </div>
+                  <Link href={"/coupons"}>
+                    <div className="px-4 hover:bg-cust_green hover:text-white  leading-8 cursor-pointer">
+                      Coupons
+                    </div>
+                  </Link>
+                  <Link href={"/myaddress"}>
+                    <div className="px-4 hover:bg-cust_green hover:text-white  leading-8 cursor-pointer">
+                      Saved Addresses
+                    </div>
+                  </Link>
+                  <Link href={"/mycards"}>
+                    <div className="px-4 hover:bg-cust_green hover:text-white leading-8 cursor-pointer">
+                      Saved Cards
+                    </div>
+                  </Link>
 
                   {userCtx.isLoggedIn && (
                     <div

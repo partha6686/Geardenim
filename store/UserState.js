@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 export const UserContext = createContext();
 
 const CartState = (props) => {
+  const router = useRouter();
   const [user, setUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -35,6 +36,7 @@ const CartState = (props) => {
     if (response.status === 200) {
       setIsLoggedIn(false);
       setUser({});
+      router.push("/");
     }
     console.log(json);
   };

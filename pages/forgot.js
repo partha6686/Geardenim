@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
+import { useRouter } from "next/router";
+import { getCookie } from "cookies-next";
 
 const Forgot = () => {
+  const router = useRouter();
+  useEffect(() => {
+    if (getCookie("isLoggedIn") == true) {
+      router.push("/");
+    }
+  }, []);
   return (
     <div>
       <div className="h-screen flex justify-center items-center bg-gray-50">

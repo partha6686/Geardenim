@@ -1,15 +1,24 @@
-import React, { useContext } from "react";
+import React, { useContext ,useEffect} from "react";
 import Link from "next/link";
 import { BsBagCheckFill } from "react-icons/bs";
 import { CartContext } from "../store/CartState";
+import { useRouter } from "next/router";
+import { getCookie } from "cookies-next";
 
 const Checkout = () => {
   const cartCtx = useContext(CartContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (getCookie("isLoggedIn") !== true) {
+      router.push("/signin");
+    }
+  }, []);
 
   return (
     <div className="bg-gray-50 py-4">
       <div className="container lg:px-24 mx-auto">
-        <h2 className=" text-2xl font-bold my-4 text-gray-800">Checkout</h2>
+        <h2 className=" text-2xl font-bold my-4 text-gray-800">CHECKOUT</h2>
         <div className="flex flex-col-reverse sm:flex-row">
           <div className="flex-1 m-2 p-4 border border-gray-300 rounded-lg bg-white shadow-md">
             <h3 className="font-semibold my-3">CONTACT DETAILS </h3>
