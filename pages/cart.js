@@ -7,11 +7,12 @@ import { CartContext } from "../store/CartState";
 const Cart = () => {
   const cartCtx = useContext(CartContext);
 
-
   return (
     <div className="bg-cust_light ">
       <div className="container mx-auto lg:px-24 py-4">
-        <h1 className="text-2xl font-bold m-2">Shopping Cart</h1>
+        <h1 className="text-lg sm:text-2xl font-bold mx-2 my-2 sm:my-4 text-gray-800">
+          SHOPPING CART
+        </h1>
         <div className="flex flex-col md:flex-row">
           <div className="flex-grow">
             {cartCtx.cart &&

@@ -145,10 +145,10 @@ const Navbar = () => {
 
                   {userCtx.isLoggedIn && (
                     <div
-                      className="px-4 hover:bg-cust_green hover:text-white text-cust_green font-semibold leading-8 cursor-pointer border-t-2 border-emerald-100"
+                      className="px-4 hover:bg-cust_green hover:text-white text-rose-600 font-semibold leading-8 cursor-pointer border-t-2 border-emerald-100"
                       onClick={() => userCtx.logout()}
                     >
-                      LOGOUT
+                      Logout
                     </div>
                   )}
                 </div>
@@ -207,7 +207,13 @@ const Navbar = () => {
         className="w-72 sm:w-96 fixed top-0 left-0 bg-cust_white z-50 transform transition-transform -translate-x-full"
       >
         <div className="p-4 bg-cust_green text-cust_white text-2xl font-bold flex items-center justify-between">
-          <h2 className="cursor-pointer">Hello, Partha</h2>
+          {userCtx.isLoggedIn ? (
+            <h2 className="cursor-pointer">
+              Hello, {userCtx.user.name && userCtx.user.name.split(" ")[0]}
+            </h2>
+          ) : (
+            <h2>Welcome</h2>
+          )}
           <AiOutlineClose
             className="cursor-pointer text-3xl"
             onClick={handleSidebar}
@@ -311,11 +317,20 @@ const Navbar = () => {
                 Customer Service
               </div>
             </Link>
-            <Link href="/">
-              <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
-                Sign out
+            {userCtx.isLoggedIn ? (
+              <div
+                className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer text-rose-600 font-semibold"
+                onClick={() => userCtx.logout()}
+              >
+                Logout
               </div>
-            </Link>
+            ) : (
+              <Link href="/signin">
+                <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer text-cust_green">
+                  Login
+                </div>
+              </Link>
+            )}
           </div>
         </div>
       </div>
