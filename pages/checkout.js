@@ -1,12 +1,15 @@
-import React, { useContext ,useEffect} from "react";
-import Link from "next/link";
+import React, { useContext, useEffect } from "react";
+import Head from "next/head";
+import Script from "next/script";
 import { BsBagCheckFill } from "react-icons/bs";
 import { CartContext } from "../store/CartState";
+import { UserContext } from "../store/UserState";
 import { useRouter } from "next/router";
 import { getCookie } from "cookies-next";
 
 const Checkout = () => {
   const cartCtx = useContext(CartContext);
+  const userCtx = useContext(UserContext);
   const router = useRouter();
 
   useEffect(() => {
@@ -15,8 +18,64 @@ const Checkout = () => {
     }
   }, []);
 
+  const initiatePayment = async () => {
+    let rid = Math.floor(Math.random() * Date.now());
+    let data = {
+      cart: cartCtx.cart,
+      subTotal: cartCtx.totalAmt.total * 100,
+      rid,
+    };
+    let response = await fetch(`${process.env.HOST}generateorder`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: document.cookie,
+      },
+      body: JSON.stringify(data),
+    });
+    var json = await response.json();
+
+    let options = {
+      key: process.env.NEXT_PUBLIC_RZP_KEY,
+      amount: json.amount,
+      currency: json.currency,
+      name: "Geardenim",
+      description: "Gear up for the biggest ride of your life",
+      image: "https://i.ibb.co/8xSfsP6/fav-geardenim-1.jpg",
+      order_id: json.id,
+      handler: async (response) => {
+        // alert(response.razorpay_payment_id);
+        let rzpData = {
+          razorpay_payment_id: response.razorpay_payment_id,
+          razorpay_order_id: response.razorpay_order_id,
+          razorpay_signature: response.razorpay_signature,
+          order_id: json.id,
+        };
+        let rgpResponse = await fetch(`${process.env.HOST}transaction`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Cookie: document.cookie,
+          },
+          body: JSON.stringify(rzpData),
+        });
+        let rgpJson = await rgpResponse.json();
+        console.log(rgpJson);
+      },
+      notes: {
+        address: "Razorpay Corporate Office",
+      },
+      theme: {
+        color: "#50D890",
+      },
+    };
+
+    var rzp1 = new window.Razorpay(options);
+    rzp1.open();
+  };
   return (
     <div className="bg-gray-50 py-4">
+      <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
       <div className="container lg:px-24 mx-auto">
         <h2 className=" text-2xl font-bold my-4 text-gray-800">CHECKOUT</h2>
         <div className="flex flex-col-reverse sm:flex-row">
@@ -147,12 +206,13 @@ const Checkout = () => {
                   />
                 </div>
               </div>
-              <Link href="/order/3329050959">
-                <button className="w-full h-11 bg-cust_green my-3 text-cust_white font-semibold flex justify-center items-center">
-                  <BsBagCheckFill className="text-lg mx-1" />
-                  <p>PAY ₹ {cartCtx.totalAmt.total}</p>
-                </button>
-              </Link>
+              <button
+                className="w-full h-11 bg-cust_green my-3 text-cust_white font-semibold flex justify-center items-center"
+                onClick={initiatePayment}
+              >
+                <BsBagCheckFill className="text-lg mx-1" />
+                <p>PAY ₹ {cartCtx.totalAmt.total}</p>
+              </button>
             </div>
           </div>
 

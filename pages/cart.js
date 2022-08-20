@@ -56,6 +56,12 @@ const Cart = () => {
                   <p>PLACE ORDER</p>
                 </button>
               </Link>
+              <div
+                className="text-end text-gray-500 font-semibold cursor-pointer hover:text-rose-600"
+                onClick={() => cartCtx.clearCart()}
+              >
+                Clear Cart
+              </div>
             </div>
           </div>
         </div>
