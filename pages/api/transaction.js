@@ -1,5 +1,6 @@
 import connectDb from "../../middleware/db";
 import fetchUser from "../../middleware/fetchUser";
+import Order from "../../models/Order";
 var crypto = require("crypto");
 
 const handler = async (req, res) => {
@@ -10,13 +11,15 @@ const handler = async (req, res) => {
         .createHmac("sha256", process.env.NEXT_PUBLIC_RZP_SECRET)
         .update(signature.toString())
         .digest("hex");
-      let response = { signatureIsValid: "false" };
       if (expectedSignature == req.body.razorpay_signature) {
         //payment is successful
-        response = { signatureIsValid: "true" };
-        res.status(200).json(response);
+        let order = await Order.findOneAndUpdate(
+          { orderId: req.body.order_id },
+          { status: "processing" }
+        );
+        res.status(200).json({ payment: "true" });
       } else {
-        res.status(401).json(response);
+        res.status(401).json({ payment: "false" });
       }
     } else {
       res.status(400).json({ error: "Bad Request" });

@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from "react";
-import Head from "next/head";
+import React, { useState, useContext, useEffect } from "react";
 import Script from "next/script";
 import { BsBagCheckFill } from "react-icons/bs";
 import { CartContext } from "../store/CartState";
@@ -11,12 +10,25 @@ const Checkout = () => {
   const cartCtx = useContext(CartContext);
   const userCtx = useContext(UserContext);
   const router = useRouter();
+  const [cust, setCust] = useState({
+    custName: "",
+    phone: "",
+    address: "",
+    state: "select",
+    city: "select",
+    pincode: "",
+  });
 
   useEffect(() => {
     if (getCookie("isLoggedIn") !== true) {
       router.push("/signin");
     }
+    console.log(cartCtx.cart);
   }, []);
+
+  const handleChange = (e) => {
+    setCust({ ...cust, [e.target.name]: e.target.value });
+  };
 
   const initiatePayment = async () => {
     let rid = Math.floor(Math.random() * Date.now());
@@ -24,6 +36,9 @@ const Checkout = () => {
       cart: cartCtx.cart,
       subTotal: cartCtx.totalAmt.total * 100,
       rid,
+      custName: cust.custName,
+      custAddress: `${cust.address}, ${cust.city}, ${cust.state} - ${cust.pincode}`,
+      custPhone: cust.phone,
     };
     let response = await fetch(`${process.env.HOST}generateorder`, {
       method: "POST",
@@ -60,7 +75,9 @@ const Checkout = () => {
           body: JSON.stringify(rzpData),
         });
         let rgpJson = await rgpResponse.json();
-        console.log(rgpJson);
+        if (rgpResponse.status == 200) {
+          router.push("/transaction/success");
+        }
       },
       notes: {
         address: "Razorpay Corporate Office",
@@ -72,12 +89,17 @@ const Checkout = () => {
 
     var rzp1 = new window.Razorpay(options);
     rzp1.open();
+    rzp1.on("payment.failed", (response) => {
+      console.log(response.error);
+    });
   };
   return (
     <div className="bg-gray-50 py-4">
       <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
       <div className="container lg:px-24 mx-auto">
-        <h2 className=" text-2xl font-bold my-4 text-gray-800">CHECKOUT</h2>
+        <h2 className=" text-2xl font-bold my-4 text-gray-800 mx-2">
+          CHECKOUT
+        </h2>
         <div className="flex flex-col-reverse sm:flex-row">
           <div className="flex-1 m-2 p-4 border border-gray-300 rounded-lg bg-white shadow-md">
             <h3 className="font-semibold my-3">CONTACT DETAILS </h3>
@@ -93,22 +115,26 @@ const Checkout = () => {
                   <input
                     type="text"
                     id="name"
-                    name="name"
+                    name="custName"
                     className="w-full bg-white rounded border  border-gray-300 focus:ring-2 focus:ring-cust_light_green text-base outline-none text-gray-500 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                    onChange={handleChange}
+                    value={cust.custName}
                   />
                 </div>
                 <div className="mb-4 w-full">
                   <label
-                    htmlFor="email"
+                    htmlFor="phone"
                     className="leading-7 text-sm text-gray-800"
                   >
-                    Email
+                    Phone
                   </label>
                   <input
-                    type="email"
-                    id="email"
-                    name="email"
+                    type="tel"
+                    id="phone"
+                    name="phone"
                     className="w-full bg-white rounded border border-gray-300 focus:ring-2 focus:ring-cust_light_green text-base outline-none text-gray-500 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                    onChange={handleChange}
+                    value={cust.phone}
                   />
                 </div>
               </div>
@@ -123,6 +149,8 @@ const Checkout = () => {
                   id="address"
                   name="address"
                   className="w-full h-20 bg-white rounded border border-gray-300 focus:ring-2 focus:ring-cust_light_green text-base outline-none text-gray-500 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out resize-none"
+                  onChange={handleChange}
+                  value={cust.address}
                 ></textarea>
               </div>
               <div className="flex flex-col lg:flex-row">
@@ -136,8 +164,9 @@ const Checkout = () => {
                   <select
                     name="state"
                     id="state"
-                    defaultValue={"select"}
                     className="w-full bg-white rounded border border-gray-300 focus:ring-2 focus:ring-cust_light_green text-base outline-none text-gray-500 py-2 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                    onChange={handleChange}
+                    value={cust.state}
                   >
                     <option vlaue="select" disabled>
                       select
@@ -158,8 +187,9 @@ const Checkout = () => {
                   <select
                     name="city"
                     id="city"
-                    defaultValue={"select"}
                     className="w-full bg-white rounded border border-gray-300 focus:ring-2 focus:ring-cust_light_green text-base outline-none text-gray-500 py-2 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                    onChange={handleChange}
+                    value={cust.city}
                   >
                     <option vlaue="select" disabled>
                       select
@@ -189,20 +219,8 @@ const Checkout = () => {
                     id="pincode"
                     name="pincode"
                     className="w-full bg-white rounded border border-gray-300 focus:ring-2 focus:ring-cust_light_green text-base outline-none text-gray-500 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                  />
-                </div>
-                <div className="mb-4 w-full">
-                  <label
-                    htmlFor="phone"
-                    className="leading-7 text-sm text-gray-800"
-                  >
-                    Phone
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    className="w-full bg-white rounded border border-gray-300 focus:ring-2 focus:ring-cust_light_green text-base outline-none text-gray-500 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                    onChange={handleChange}
+                    value={cust.pincode}
                   />
                 </div>
               </div>

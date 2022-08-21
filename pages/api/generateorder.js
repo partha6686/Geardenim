@@ -1,6 +1,7 @@
 import connectDb from "../../middleware/db";
 import fetchUser from "../../middleware/fetchUser";
 const Razorpay = require("razorpay");
+import Order from "../../models/Order";
 
 const handler = async (req, res) => {
   try {
@@ -15,8 +16,26 @@ const handler = async (req, res) => {
         currency: "INR",
         receipt: req.body.rid,
       };
-      instance.orders.create(options, function (err, order) {
+      instance.orders.create(options, async (err, order) => {
         if (!err) {
+          var products = [];
+          req.body.cart.forEach((item) => {
+            products.push({
+              productId: item.id,
+              quantity: item.qty,
+              size: item.size,
+            });
+          });
+          let newOrder = new Order({
+            orderId: order.id,
+            userId: req.user.id,
+            products,
+            name: req.body.custName,
+            address: req.body.custAddress,
+            phone: req.body.custPhone,
+            amount: req.body.subTotal / 100,
+          });
+          await newOrder.save();
           res.status(200).json(order);
         }
       });

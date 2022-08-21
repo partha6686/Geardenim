@@ -20,12 +20,6 @@ const handler = async (req, res) => {
             email: req.body.email,
             password: hash,
           });
-          // const data = {
-          //   user: {
-          //     id: user.id,
-          //   },
-          // };
-          // const authToken = jwt.sign(data, process.env.JWT_SECRET, { expiresIn: "2 days" });
           if (user) {
             res.status(200).json({ msg: "Account Created Successfully" });
           } else {
