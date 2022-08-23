@@ -46,8 +46,8 @@ const Navbar = () => {
                 <Image
                   src="/logo.jpg"
                   alt="geardenim-logo"
-                  width={180}
-                  height={40}
+                  width={160}
+                  height={45}
                 />
               </a>
             </Link>

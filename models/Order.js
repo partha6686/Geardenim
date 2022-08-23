@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const OrderSchema = new mongoose.Schema(
   {
     orderId: { type: String, required: true },
+    paymentId: { type: String, default: "Pending" },
     userId: { type: String, required: true },
     products: [
       {

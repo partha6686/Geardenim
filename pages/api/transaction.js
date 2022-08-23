@@ -6,6 +6,7 @@ var crypto = require("crypto");
 const handler = async (req, res) => {
   try {
     if (req.method == "POST") {
+      // validatePaymentVerification({"order_id": razorpayOrderId, "payment_id": razorpayPaymentId }, signature, secret);
       let signature = req.body.order_id + "|" + req.body.razorpay_payment_id;
       let expectedSignature = crypto
         .createHmac("sha256", process.env.NEXT_PUBLIC_RZP_SECRET)
@@ -15,7 +16,7 @@ const handler = async (req, res) => {
         //payment is successful
         let order = await Order.findOneAndUpdate(
           { orderId: req.body.order_id },
-          { status: "processing" }
+          { paymentId: req.body.razorpay_payment_id, status: "processing" }
         );
         res.status(200).json({ payment: "true" });
       } else {
