@@ -63,7 +63,8 @@ const Checkout = () => {
           });
           let rgpJson = await rgpResponse.json();
           if (rgpResponse.status == 200) {
-            router.push("/transaction/success");
+            cartCtx.clearCart();
+            router.push(`/transaction/${json.id}`);
           }
         },
         modal: {
