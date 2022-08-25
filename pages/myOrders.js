@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { getCookie } from "cookies-next";
 import HistoryCards from "../components/HistoryCards";
 
-const Orders = () => {
+const Orders = ({ orders }) => {
   const router = useRouter();
 
   useEffect(() => {
@@ -18,11 +18,26 @@ const Orders = () => {
         <h2 className="text-lg sm:text-2xl font-bold mx-2 my-2 sm:my-4 text-gray-800">
           ORDER HISTORY
         </h2>
-        <HistoryCards />
-        <HistoryCards />
+        {orders.map((order) => (
+          <HistoryCards key={order._id} order={order} />
+        ))}
       </div>
     </div>
   );
 };
+
+export async function getServerSideProps(context) {
+  // const cookies = context.req.headers.cookie;
+  const response = await fetch(`${process.env.HOST}userorders`, {
+    method: "GET",
+    headers: {
+      Cookie: context.req.headers.cookie,
+    },
+  });
+  let orders = await response.json();
+  return {
+    props: { orders },
+  };
+}
 
 export default Orders;

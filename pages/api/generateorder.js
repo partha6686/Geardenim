@@ -16,20 +16,17 @@ const handler = async (req, res) => {
         currency: "INR",
         receipt: req.body.rid,
       };
+
+      req.body.cart.forEach(element => {
+        element.status = "processing"
+      });
+
       instance.orders.create(options, async (err, order) => {
         if (!err) {
-          var products = [];
-          req.body.cart.forEach((item) => {
-            products.push({
-              productId: item.id,
-              quantity: item.qty,
-              size: item.size,
-            });
-          });
           let newOrder = new Order({
             orderId: order.id,
             userId: req.user.id,
-            products,
+            products: req.body.cart,
             name: req.body.custName,
             address: req.body.custAddress,
             phone: req.body.custPhone,

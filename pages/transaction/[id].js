@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { getCookie } from "cookies-next";
 
-const TransactionSuccess = (status) => {
+const TransactionSuccess = ({ status, oid }) => {
   const router = useRouter();
   const { id } = router.query;
 
@@ -38,7 +38,7 @@ const TransactionSuccess = (status) => {
               Thank You for Shopping with us. Your Order has been Processed.
             </p>
             <div className="mt-6 text-cust_green font-semibold hover:underline underline-offset-2">
-              <Link href={"/myorders"}>
+              <Link href={`/order/${oid}`}>
                 <a>Track/view Orders</a>
               </Link>
             </div>
@@ -51,11 +51,11 @@ const TransactionSuccess = (status) => {
 
 export async function getServerSideProps(context) {
   const { id } = context.query;
-  const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}order/${id}`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}order?id=${id}`);
   let order = await response.json();
 
   return {
-    props: { status: order.status },
+    props: { status: order.status, oid: order.orderId },
   };
 }
 

@@ -24,7 +24,7 @@ const Checkout = () => {
         subTotal: cartCtx.totalAmt.total * 100,
         rid,
         custName: values.custName,
-        custAddress: `${values.address}, ${values.city}, ${values.state} - ${values.pincode}`,
+        custAddress: `${values.address},<br/> ${values.city}, ${values.state}-${values.pincode}`,
         custPhone: values.phone,
       };
       let response = await fetch(`${process.env.HOST}generateorder`, {

@@ -1,8 +1,8 @@
-import Order from "../../../models/Order";
-import connectDb from "../../../middleware/db";
+import Order from "../../models/Order";
+import connectDb from "../../middleware/db";
 
 const handler = async (req, res) => {
-  const { id } = req.query;
+  const id = req.query.id;
   try {
     let order = await Order.findOne({ orderId: id });
     res.status(200).json(order);

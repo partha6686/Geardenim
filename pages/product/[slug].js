@@ -19,6 +19,7 @@ const Product = ({ product }) => {
   const handlePinChange = (e) => {
     setPin(e.target.value);
   };
+  
   const handleCheckPin = async () => {
     const pins = await fetch("http://localhost:3000/api/pincode");
     const pinsJson = await pins.json();
@@ -42,6 +43,7 @@ const Product = ({ product }) => {
       mrp: product.mrp,
       price: product.price,
       dis: Math.floor(((product.mrp - product.price) / product.mrp) * 100),
+      status: "pending",
     };
     cartCtx.buyNow(item);
   };
@@ -59,9 +61,11 @@ const Product = ({ product }) => {
       mrp: product.mrp,
       price: product.price,
       dis: Math.floor(((product.mrp - product.price) / product.mrp) * 100),
+      status: "pending",
     };
     cartCtx.addToCart(item);
   };
+
   return (
     <>
       <section className=" body-font overflow-hidden">

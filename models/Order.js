@@ -5,13 +5,7 @@ const OrderSchema = new mongoose.Schema(
     orderId: { type: String, required: true },
     paymentId: { type: String, default: "Pending" },
     userId: { type: String, required: true },
-    products: [
-      {
-        productId: { type: String, required: true },
-        quantity: { type: Number, default: 1 },
-        size: { type: String },
-      },
-    ],
+    products: { type: Array, required: true },
     name: { type: String, required: true },
     address: { type: String, required: true },
     phone: { type: String, required: true },
