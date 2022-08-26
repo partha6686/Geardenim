@@ -19,11 +19,11 @@ const Product = ({ product }) => {
   const handlePinChange = (e) => {
     setPin(e.target.value);
   };
-  
+
   const handleCheckPin = async () => {
-    const pins = await fetch("http://localhost:3000/api/pincode");
+    const pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}pincode`);
     const pinsJson = await pins.json();
-    if (pinsJson.includes(parseInt(pin))) {
+    if (Object.keys(pinsJson).includes(pin)) {
       setCheckDelivery(true);
     } else {
       setCheckDelivery(false);

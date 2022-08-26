@@ -6,9 +6,8 @@ import { CartContext } from "../store/CartState";
 import { useRouter } from "next/router";
 import { getCookie } from "cookies-next";
 import useForm from "../Hooks/useForm";
-// import { ReactComponent as Loading} from "../public/FormSpinner.svg";
 
-const Checkout = () => {
+const Checkout = ({ pinsJson }) => {
   const cartCtx = useContext(CartContext);
   const router = useRouter();
   const [rzpProcessing, setRzpProcessing] = useState(null);
@@ -99,14 +98,15 @@ const Checkout = () => {
     }
   };
 
-  const { handleChange, values, errors, handleSubmit } =
-    useForm(initiatePayment);
-
+  const { handleChange, values, errors, handleSubmit } = useForm(
+    initiatePayment,
+    pinsJson
+  );
+  // console.log(values);
   useEffect(() => {
     if (getCookie("isLoggedIn") !== true) {
       router.push("/signin");
     }
-    // console.log(cartCtx.cart);
   }, []);
 
   return (
@@ -199,6 +199,7 @@ const Checkout = () => {
                     className="w-full bg-white rounded border border-gray-300 focus:ring-2 focus:ring-cust_light_green text-base outline-none text-gray-500 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                     onChange={handleChange}
                     value={values.state}
+                    readOnly={true}
                   />
                 </div>
                 <div className="mb-4 w-full">
@@ -206,7 +207,7 @@ const Checkout = () => {
                     htmlFor="city"
                     className="leading-7 text-sm  text-gray-800"
                   >
-                    City
+                    City/Dist.
                   </label>
                   <input
                     name="city"
@@ -214,6 +215,7 @@ const Checkout = () => {
                     className="w-full bg-white rounded border border-gray-300 focus:ring-2 focus:ring-cust_light_green text-base outline-none text-gray-500 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                     onChange={handleChange}
                     value={values.city}
+                    readOnly={true}
                   />
                 </div>
               </div>
@@ -281,5 +283,13 @@ const Checkout = () => {
     </div>
   );
 };
+
+export async function getServerSideProps(context) {
+  const pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}pincode`);
+  const pinsJson = await pins.json();
+  return {
+    props: { pinsJson },
+  };
+}
 
 export default Checkout;

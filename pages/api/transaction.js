@@ -16,7 +16,7 @@ const handler = async (req, res) => {
         //payment is successful
         let order = await Order.findOneAndUpdate(
           { orderId: req.body.order_id },
-          { paymentId: req.body.razorpay_payment_id, status: "processing" }
+          { paymentId: req.body.razorpay_payment_id, status: "paid" }
         );
         res.status(200).json({ payment: "true" });
       } else {
