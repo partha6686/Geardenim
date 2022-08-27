@@ -36,42 +36,24 @@ const Checkout = ({ pinsJson }) => {
       });
       var json = await response.json();
 
-      let options = {
-        key: process.env.NEXT_PUBLIC_RZP_KEY,
-        amount: json.amount,
-        currency: json.currency,
-        name: "Geardenim",
-        description: "Gear up for the biggest ride of your life",
-        image: "https://i.ibb.co/8xSfsP6/fav-geardenim-1.jpg",
-        order_id: json.id,
-        handler: async (response) => {
-          // alert(response.razorpay_payment_id);
-          let rzpData = {
-            razorpay_payment_id: response.razorpay_payment_id,
-            razorpay_order_id: response.razorpay_order_id,
-            razorpay_signature: response.razorpay_signature,
-            order_id: json.id,
-          };
-          let rgpResponse = await fetch(`${process.env.HOST}transaction`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Cookie: document.cookie,
-            },
-            body: JSON.stringify(rzpData),
-          });
-          let rgpJson = await rgpResponse.json();
-          if (rgpResponse.status == 200) {
-            cartCtx.clearCart();
-            router.push(`/transaction/${json.id}`);
-          }
-        },
-        modal: {
-          ondismiss: async () => {
+      if (response.status == 200) {
+        let options = {
+          key: process.env.NEXT_PUBLIC_RZP_KEY,
+          amount: json.amount,
+          currency: json.currency,
+          name: "Geardenim",
+          description: "Gear up for the biggest ride of your life",
+          image: "https://i.ibb.co/8xSfsP6/fav-geardenim-1.jpg",
+          order_id: json.id,
+          handler: async (response) => {
+            // alert(response.razorpay_payment_id);
             let rzpData = {
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_signature: response.razorpay_signature,
               order_id: json.id,
             };
-            let rgpResponse = await fetch(`${process.env.HOST}cancelorder`, {
+            let rgpResponse = await fetch(`${process.env.HOST}transaction`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -79,22 +61,44 @@ const Checkout = ({ pinsJson }) => {
               },
               body: JSON.stringify(rzpData),
             });
-            setRzpProcessing(false);
+            let rgpJson = await rgpResponse.json();
+            if (rgpResponse.status == 200) {
+              router.push(`/transaction/${json.id}`);
+            }
           },
-        },
-        notes: {
-          address: "Razorpay Corporate Office",
-        },
-        theme: {
-          color: "#50D890",
-        },
-      };
+          modal: {
+            ondismiss: async () => {
+              let rzpData = {
+                order_id: json.id,
+              };
+              let rgpResponse = await fetch(`${process.env.HOST}cancelorder`, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Cookie: document.cookie,
+                },
+                body: JSON.stringify(rzpData),
+              });
+              setRzpProcessing(false);
+            },
+          },
+          notes: {
+            address: "Razorpay Corporate Office",
+          },
+          theme: {
+            color: "#50D890",
+          },
+        };
 
-      var rzp1 = new window.Razorpay(options);
-      rzp1.open();
-      rzp1.on("payment.failed", (response) => {
-        console.log(response.error);
-      });
+        var rzp1 = new window.Razorpay(options);
+        rzp1.open();
+        rzp1.on("payment.failed", (response) => {
+          console.log(response.error);
+        });
+      } else {
+        console.log(json);
+        setRzpProcessing(false);
+      }
     }
   };
 
@@ -102,7 +106,7 @@ const Checkout = ({ pinsJson }) => {
     initiatePayment,
     pinsJson
   );
-  // console.log(values);
+
   useEffect(() => {
     if (getCookie("isLoggedIn") !== true) {
       router.push("/signin");

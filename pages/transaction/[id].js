@@ -1,12 +1,13 @@
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { getCookie } from "cookies-next";
+import { CartContext } from "../../store/CartState";
 
 const TransactionSuccess = ({ status, oid }) => {
   const router = useRouter();
-  const { id } = router.query;
+  const cartCtx = useContext(CartContext);
 
   useEffect(() => {
     if (status == "pending" || getCookie("isLoggedIn") == false) {
@@ -15,6 +16,8 @@ const TransactionSuccess = ({ status, oid }) => {
       } else {
         router.push("/");
       }
+    } else if (status == "paid") {
+      cartCtx.clearCart();
     }
   }, []);
 
