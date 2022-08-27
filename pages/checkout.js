@@ -52,6 +52,7 @@ const Checkout = ({ pinsJson }) => {
               razorpay_order_id: response.razorpay_order_id,
               razorpay_signature: response.razorpay_signature,
               order_id: json.id,
+              cart: cartCtx.cart,
             };
             let rgpResponse = await fetch(`${process.env.HOST}transaction`, {
               method: "POST",
@@ -113,8 +114,10 @@ const Checkout = ({ pinsJson }) => {
   useEffect(() => {
     if (getCookie("isLoggedIn") !== true) {
       router.push("/signin");
+    } else if (cartCtx.cart.length == 0) {
+      router.push("/");
     }
-  }, []);
+  }, [getCookie("isLoggedIn"), cartCtx.cart.length]);
 
   return (
     <div className="bg-gray-50 py-4">

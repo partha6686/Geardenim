@@ -15,7 +15,13 @@ const handler = async (req, res) => {
         if (product.price !== item.price || product.mrp !== item.mrp) {
           res.status(400).json({
             error:
-              "Price of the Products Changed. Please clear Cart and try again.",
+              "Price of the Products Changed. Please clear Cart and try again!",
+          });
+          return;
+        } else if ( product.availability.filter((element) => element.size == item.size)[0].qty < item.qty ) {
+          res.status(400).json({
+            error:
+              "Some items in your cart went out of stock. Please try again!",
           });
           return;
         }
@@ -56,7 +62,7 @@ const handler = async (req, res) => {
       } else {
         res.status(400).json({
           error:
-            "Price of the Products Changed. Please clear Cart and try again.",
+            "Price of the Products Changed. Please clear Cart and try again!",
         });
         return;
       }
