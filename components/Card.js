@@ -16,6 +16,14 @@ const Card = ({ product }) => {
               objectFit="contain"
             />
           </div>
+          <div className="relative">
+            {product.availability.filter((item) => item.qty > 0).length ==
+              0 && (
+              <div className="absolute right-0 bottom-0 px-2 py-1 bg-rose-200">
+                <p className="text-rose-600 font-bold text-xs">OUT OF STOCK</p>
+              </div>
+            )}
+          </div>
           <div className="p-4  m-0 text-center">
             <p className="text-sm sm:text-base font-semibold text-cust_dark">
               {product.brand}

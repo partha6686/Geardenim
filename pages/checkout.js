@@ -96,6 +96,9 @@ const Checkout = ({ pinsJson }) => {
           console.log(response.error);
         });
       } else {
+        if (response.status == 400) {
+          cartCtx.clearCart();
+        }
         console.log(json);
         setRzpProcessing(false);
       }

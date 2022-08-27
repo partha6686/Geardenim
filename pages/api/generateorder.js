@@ -15,12 +15,12 @@ const handler = async (req, res) => {
         if (product.price !== item.price || product.mrp !== item.mrp) {
           res.status(400).json({
             error:
-              "Price of the Products Changed. Please clear Cart and try again 1.",
+              "Price of the Products Changed. Please clear Cart and try again.",
           });
           return;
         }
       }
-      
+
       if (sum * 100 == req.body.subTotal) {
         var instance = new Razorpay({
           key_id: process.env.NEXT_PUBLIC_RZP_KEY,

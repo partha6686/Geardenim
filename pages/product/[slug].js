@@ -115,46 +115,64 @@ const Product = ({ product }) => {
                   inclusive of all taxes
                 </p>
               </div>
-              <div className="flex mt-6 items-center pb-5 mb-5">
-                <div className="flex items-center">
-                  <span className="mr-3 font-semibold text-base sm:text-lg">
-                    SELECT SIZE
-                  </span>
-                  <div className="relative">
-                    <select
-                      className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-8"
-                      onChange={(e) => setSize(e.target.value)}
-                      value={size}
-                    >
-                      <option vlaue="" disabled></option>
-                      {product.availability
-                        .filter((item) => item.qty > 0)
-                        .map((item) => (
-                          <option key={item._id} value={item.size}>
-                            {item.size}
-                          </option>
-                        ))}
-                    </select>
-                    <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
-                      <svg
-                        fill="none"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeidth="2"
-                        className="w-4 h-4"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M6 9l6 6 6-6"></path>
-                      </svg>
+              {product.availability.filter((item) => item.qty > 0).length !==
+                0 && (
+                <div className="flex mt-6 items-center pb-5 mb-5">
+                  <div className="flex items-center">
+                    <span className="mr-3 font-semibold text-base sm:text-lg">
+                      SELECT SIZE
                     </span>
+
+                    <div className="relative">
+                      <select
+                        className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-8"
+                        onChange={(e) => setSize(e.target.value)}
+                        value={size}
+                      >
+                        <option vlaue="" disabled></option>
+                        {product.availability
+                          .filter((item) => item.qty > 0)
+                          .map((item) => (
+                            <option key={item._id} value={item.size}>
+                              {item.size}
+                            </option>
+                          ))}
+                      </select>
+                      <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
+                        <svg
+                          fill="none"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeidth="2"
+                          className="w-4 h-4"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M6 9l6 6 6-6"></path>
+                        </svg>
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
+              {product.availability.filter((item) => item.qty > 0).length ==
+                0 && (
+                <div className="text-rose-700 font-semibold ">Out of Stock</div>
+              )}
               <div className="border-b-2 border-cust_grey flex flex-col sm:flex-row">
                 <button
-                  className="flex-1 h-11 bg-cust_green py-2 my-2 mx-2 text-cust_white font-semibold"
+                  className={`flex-1 h-11 ${
+                    product.availability.filter((item) => item.qty > 0)
+                      .length == 0
+                      ? "bg-emerald-200"
+                      : "bg-cust_green"
+                  }  py-2 my-2 mr-2 text-cust_white font-semibold`}
                   onClick={handleAddToCart}
+                  disabled={
+                    product.availability.filter((item) => item.qty > 0).length == 0
+                      ? true
+                      : false
+                  }
                 >
                   <span className="flex justify-center items-center">
                     <BsFillCartCheckFill className="text-lg mx-1" />
@@ -162,8 +180,18 @@ const Product = ({ product }) => {
                   </span>
                 </button>
                 <button
-                  className="flex-1 h-11 bg-cust_green py-2 my-2 mx-2 text-cust_white font-semibold "
+                  className={`flex-1 h-11 ${
+                    product.availability.filter((item) => item.qty > 0)
+                      .length == 0
+                      ? "bg-emerald-200"
+                      : "bg-cust_green"
+                  }  py-2 my-2 ml-2 text-cust_white font-semibold `}
                   onClick={handleBuyNow}
+                  disabled={
+                    product.availability.filter((item) => item.qty > 0).length == 0
+                      ? true
+                      : false
+                  }
                 >
                   <span className="flex justify-center items-center">
                     <BsFillCartCheckFill className="text-lg mx-1" />
