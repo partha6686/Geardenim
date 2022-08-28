@@ -26,6 +26,8 @@ const useForm = (callback, pinsJson) => {
         ...values,
         custName: userCtx.user.name,
       });
+      let newObj = omit(errors, "custName");
+      setErrors(newObj);
     }
   }, [userCtx.user._id]);
 
