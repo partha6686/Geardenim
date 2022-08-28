@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { omit } from "lodash";
+import { UserContext } from "../store/UserState";
 
 const useForm = (callback, pinsJson) => {
+  const userCtx = useContext(UserContext);
+
   const [values, setValues] = useState({
     custName: "",
     phone: "",
@@ -16,6 +19,15 @@ const useForm = (callback, pinsJson) => {
     address: "",
     pincode: "",
   });
+
+  useEffect(() => {
+    if (userCtx.user.name) {
+      setValues({
+        ...values,
+        custName: userCtx.user.name,
+      });
+    }
+  }, [userCtx.user._id]);
 
   const validate = (event, name, value) => {
     switch (name) {
@@ -65,6 +77,8 @@ const useForm = (callback, pinsJson) => {
           });
           setValues({
             ...values,
+            city: "",
+            state: "",
             [name]: value,
           });
         } else {
@@ -76,6 +90,17 @@ const useForm = (callback, pinsJson) => {
               ...values,
               city: pinsJson[value.trim()][0],
               state: pinsJson[value.trim()][1],
+              [name]: value,
+            });
+          } else {
+            setErrors({
+              ...errors,
+              pincode: "Entered pincode is not serviceable.",
+            });
+            setValues({
+              ...values,
+              city: "",
+              state: "",
               [name]: value,
             });
           }

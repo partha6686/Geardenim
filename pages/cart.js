@@ -22,7 +22,9 @@ const Cart = () => {
           </div>
           <div className="w-full md:w-5/12">
             <div className="bg-cust_white p-3 m-2 rounded-md">
-              <h2 className="mb-4">PRICE DETAILS (5 Items)</h2>
+              <h2 className="mb-4">
+                PRICE DETAILS ({cartCtx.cart.length} Items)
+              </h2>
               <p className="float-left text-cust_light_text">Total MRP</p>
               <p className="float-right text-cust_dark">
                 {" "}
@@ -51,7 +53,10 @@ const Cart = () => {
               </p>
               <p className="clear-both mb-2"></p>
               <Link href={"/checkout"}>
-                <button className="w-full h-11 bg-cust_green my-3 text-cust_white font-semibold flex justify-center items-center">
+                <button
+                  disabled={cartCtx.cart.length == 0 ? true : false}
+                  className="w-full h-11 disabled:bg-emerald-200 bg-cust_green my-3 text-cust_white font-semibold flex justify-center items-center"
+                >
                   <BsBagCheckFill className="text-lg mx-1" />
                   <p>PLACE ORDER</p>
                 </button>

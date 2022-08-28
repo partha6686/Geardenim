@@ -25,7 +25,9 @@ const handler = async (req, res) => {
               key["qty"] -= item.qty;
             }
           }
-          await Product.findByIdAndUpdate(product._id, product);
+          await Product.findByIdAndUpdate(product._id, {
+            availability: product.availability,
+          });
         }
 
         res.status(200).json({ payment: "true" });

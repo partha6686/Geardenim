@@ -9,6 +9,12 @@ const handler = async (req, res) => {
     if (req.method == "POST") {
       let product,
         sum = 0;
+      if (req.body.cart.length == 0) {
+        res.status(400).json({
+          error: "Cart is Empty. Please Build your Cart and try again!",
+        });
+        return;
+      }
       for await (const item of req.body.cart) {
         product = await Product.findById(item.id);
         sum += item.price * item.qty;
@@ -18,7 +24,10 @@ const handler = async (req, res) => {
               "Price of the Products Changed. Please clear Cart and try again!",
           });
           return;
-        } else if ( product.availability.filter((element) => element.size == item.size)[0].qty < item.qty ) {
+        } else if (
+          product.availability.filter((element) => element.size == item.size)[0]
+            .qty < item.qty
+        ) {
           res.status(400).json({
             error:
               "Some items in your cart went out of stock. Please try again!",

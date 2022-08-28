@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import Image from "next/image";
 import Script from "next/script";
-import { BsBagCheckFill } from "react-icons/bs";
+import { BsBagCheckFill, BsInfoCircle } from "react-icons/bs";
 import { CartContext } from "../store/CartState";
 import { useRouter } from "next/router";
 import { getCookie } from "cookies-next";
@@ -110,11 +110,12 @@ const Checkout = ({ pinsJson }) => {
     initiatePayment,
     pinsJson
   );
-
   useEffect(() => {
+    const localCart = JSON.parse(localStorage.getItem("geardenim_cart"));
     if (getCookie("isLoggedIn") !== true) {
       router.push("/signin");
-    } else if (cartCtx.cart.length == 0) {
+    } else if (!localCart) {
+      console.log("pushed to /");
       router.push("/");
     }
   }, [getCookie("isLoggedIn"), cartCtx.cart.length]);
@@ -146,6 +147,14 @@ const Checkout = ({ pinsJson }) => {
                     onChange={handleChange}
                     value={values.custName}
                   />
+                  {errors.custName && (
+                    <div className="relative">
+                      <div className="absolute top-0 left-0 text-rose-600 text-xs py-1  w-full flex items-center">
+                        <BsInfoCircle className=" mr-1 font-bold" />{" "}
+                        {errors.custName}
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <div className="mb-4 w-full">
                   <label
@@ -162,6 +171,14 @@ const Checkout = ({ pinsJson }) => {
                     onChange={handleChange}
                     value={values.phone}
                   />
+                  {errors.phone && (
+                    <div className="relative">
+                      <div className="absolute top-0 left-0 text-rose-600 text-xs py-1 w-full flex items-center">
+                        <BsInfoCircle className=" mr-1 text-bold" />
+                        <div>{errors.phone}</div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="mb-4">
@@ -178,6 +195,14 @@ const Checkout = ({ pinsJson }) => {
                   onChange={handleChange}
                   value={values.address}
                 ></textarea>
+                {errors.address && (
+                  <div className="relative">
+                    <div className="absolute top-0 left-0 text-rose-600 text-xs py-1  w-full flex items-center">
+                      <BsInfoCircle className=" mr-1 text-bold" />
+                      {errors.address}
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="mb-4 mr-4 w-full">
                 <label
@@ -194,6 +219,14 @@ const Checkout = ({ pinsJson }) => {
                   onChange={handleChange}
                   value={values.pincode}
                 />
+                {errors.pincode && (
+                  <div className="relative">
+                    <div className="absolute top-0 left-0 text-rose-600 text-xs py-1  w-full flex items-center">
+                      <BsInfoCircle className=" mr-1 text-bold" />
+                      {errors.pincode}
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="flex flex-col lg:flex-row">
                 <div className="mb-4  mr-4  w-full">
