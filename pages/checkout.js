@@ -106,10 +106,8 @@ const Checkout = ({ pinsJson }) => {
     }
   };
 
-  const { handleChange, values, errors, handleSubmit } = useForm(
-    initiatePayment,
-    pinsJson
-  );
+  const { handleChange, values, errors, handleSubmit } =
+    useForm(initiatePayment);
   useEffect(() => {
     const localCart = JSON.parse(localStorage.getItem("geardenim_cart"));
     if (getCookie("isLoggedIn") !== true) {
@@ -326,13 +324,5 @@ const Checkout = ({ pinsJson }) => {
     </div>
   );
 };
-
-export async function getServerSideProps(context) {
-  const pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}pincode`);
-  const pinsJson = await pins.json();
-  return {
-    props: { pinsJson },
-  };
-}
 
 export default Checkout;

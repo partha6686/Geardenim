@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { omit } from "lodash";
 import { UserContext } from "../store/UserState";
 
-const useForm = (callback, pinsJson) => {
+const useForm = (callback) => {
   const userCtx = useContext(UserContext);
 
   const [values, setValues] = useState({
@@ -18,6 +18,8 @@ const useForm = (callback, pinsJson) => {
     phone: "",
     address: "",
     pincode: "",
+    city: "",
+    state: "",
   });
 
   useEffect(() => {
@@ -31,7 +33,7 @@ const useForm = (callback, pinsJson) => {
     }
   }, [userCtx.user._id]);
 
-  const validate = (event, name, value) => {
+  const validate = async (event, name, value) => {
     switch (name) {
       case "custName":
         if (value.trim().length <= 4) {
@@ -76,6 +78,8 @@ const useForm = (callback, pinsJson) => {
           setErrors({
             ...errors,
             pincode: "Enter a valid pincode",
+            state: "",
+            city: "",
           });
           setValues({
             ...values,
@@ -86,18 +90,27 @@ const useForm = (callback, pinsJson) => {
         } else {
           let newObj = omit(errors, "pincode");
           setErrors(newObj);
-          if (Object.keys(pinsJson).includes(value.trim())) {
-            console.log(pinsJson[value.trim()][0], pinsJson[value.trim()][1]);
+          setValues({ ...values, [name]: value });
+          const pins = await fetch(
+            `https://api.postalpincode.in/pincode/${value.trim()}`
+          );
+          const pinsJson = await pins.json();
+          if (pinsJson[0].Status == "Success") {
+            // console.log(pinsJson[value.trim()][0], pinsJson[value.trim()][1]);
             setValues({
               ...values,
-              city: pinsJson[value.trim()][0],
-              state: pinsJson[value.trim()][1],
+              city: pinsJson[0].PostOffice[0].District,
+              state: pinsJson[0].PostOffice[0].State,
               [name]: value,
             });
+            let errObj = omit(errors, ["city", "state", "pincode"]);
+            setErrors(errObj);
           } else {
             setErrors({
               ...errors,
               pincode: "Entered pincode is not serviceable.",
+              state: "",
+              city: "",
             });
             setValues({
               ...values,

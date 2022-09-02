@@ -21,9 +21,10 @@ const Product = ({ product }) => {
   };
 
   const handleCheckPin = async () => {
-    const pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}pincode`);
+    const pins = await fetch(`https://api.postalpincode.in/pincode/${pin}`);
     const pinsJson = await pins.json();
-    if (Object.keys(pinsJson).includes(pin)) {
+    console.log(pinsJson);
+    if (pinsJson[0].Status == "Success") {
       setCheckDelivery(true);
     } else {
       setCheckDelivery(false);
@@ -169,7 +170,8 @@ const Product = ({ product }) => {
                   }  py-2 my-2 mr-2 text-cust_white font-semibold`}
                   onClick={handleAddToCart}
                   disabled={
-                    product.availability.filter((item) => item.qty > 0).length == 0
+                    product.availability.filter((item) => item.qty > 0)
+                      .length == 0
                       ? true
                       : false
                   }
@@ -188,7 +190,8 @@ const Product = ({ product }) => {
                   }  py-2 my-2 ml-2 text-cust_white font-semibold `}
                   onClick={handleBuyNow}
                   disabled={
-                    product.availability.filter((item) => item.qty > 0).length == 0
+                    product.availability.filter((item) => item.qty > 0)
+                      .length == 0
                       ? true
                       : false
                   }
