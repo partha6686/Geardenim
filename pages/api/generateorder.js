@@ -12,6 +12,7 @@ const handler = async (req, res) => {
       if (req.body.cart.length == 0) {
         res.status(400).json({
           error: "Cart is Empty. Please Build your Cart and try again!",
+          cartClr: false,
         });
         return;
       }
@@ -22,6 +23,7 @@ const handler = async (req, res) => {
           res.status(400).json({
             error:
               "Price of the Products Changed. Please clear Cart and try again!",
+            cartClr: true,
           });
           return;
         } else if (
@@ -29,8 +31,8 @@ const handler = async (req, res) => {
             .qty < item.qty
         ) {
           res.status(400).json({
-            error:
-              "Some items in your cart went out of stock. Please try again!",
+            error: "Sorry! Some items in your cart went out of stock.",
+            cartClr: true,
           });
           return;
         }
@@ -72,6 +74,7 @@ const handler = async (req, res) => {
         res.status(400).json({
           error:
             "Price of the Products Changed. Please clear Cart and try again!",
+          cartClr: true,
         });
         return;
       }

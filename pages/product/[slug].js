@@ -9,6 +9,8 @@ import {
   BsXCircleFill,
 } from "react-icons/bs";
 import { CartContext } from "../../store/CartState";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Product = ({ product }) => {
   const cartCtx = useContext(CartContext);
@@ -32,7 +34,19 @@ const Product = ({ product }) => {
   };
 
   const handleBuyNow = () => {
-    if (size === "") return;
+    if (size === "") {
+      toast.error("Please select size", {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        toastId: "select-size-error",
+      });
+      return;
+    }
     const item = {
       id: product._id,
       slug: product.slug,
@@ -50,7 +64,19 @@ const Product = ({ product }) => {
   };
 
   const handleAddToCart = () => {
-    if (size === "") return;
+    if (size === "") {
+      toast.error("Please select size", {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        toastId: "select-size-error",
+      });
+      return;
+    }
     const item = {
       id: product._id,
       slug: product.slug,
@@ -65,10 +91,32 @@ const Product = ({ product }) => {
       status: "pending",
     };
     cartCtx.addToCart(item);
+    toast.success("Item added to your cart", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      toastId: "add-to-cart-success",
+    });
   };
 
   return (
     <>
+      <ToastContainer
+        position="bottom-right"
+        theme="colored"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <section className=" body-font overflow-hidden">
         <div className="container px-5 py-10 mx-auto">
           <div className="lg:w-5/6 mx-auto flex flex-wrap">

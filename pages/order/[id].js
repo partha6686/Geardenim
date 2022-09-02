@@ -69,7 +69,10 @@ const OrderId = ({ order, mrp, dis, dCharge }) => {
                 </p>
               </div>
               <div>
-                <h2 className="font-semibold my-4">ORDER SUMMARY (2 Items)</h2>
+                <h2 className="font-semibold my-4">
+                  ORDER SUMMARY ({order[0].products.length}{" "}
+                  {order[0].products.length > 1 ? "Items" : "Item"})
+                </h2>
                 <div className="flex justify-between my-1">
                   <p className=" text-cust_light_text">Total MRP</p>
                   <p className=" text-cust_dark"> ₹ {mrp}</p>
