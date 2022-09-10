@@ -7,7 +7,7 @@ import { CartContext } from "../store/CartState";
 import { useRouter } from "next/router";
 import { getCookie } from "cookies-next";
 import useForm from "../Hooks/useForm";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Checkout = ({ pinsJson }) => {
@@ -101,9 +101,7 @@ const Checkout = ({ pinsJson }) => {
         });
       } else {
         if (json.cartClr) {
-          setTimeout(() => {
-            cartCtx.clearCart();
-          }, 3000);
+          cartCtx.clearCart();
         }
         toast.error(json.error, {
           position: "bottom-right",
@@ -124,28 +122,13 @@ const Checkout = ({ pinsJson }) => {
   const { handleChange, values, errors, handleSubmit } =
     useForm(initiatePayment);
   useEffect(() => {
-    const localCart = JSON.parse(localStorage.getItem("geardenim_cart"));
     if (getCookie("isLoggedIn") !== true) {
       router.push("/signin");
-    } else if (!localCart) {
-      router.push("/");
     }
-  }, [getCookie("isLoggedIn"), cartCtx.cart.length]);
+  }, [getCookie("isLoggedIn")]);
 
   return (
     <>
-      <ToastContainer
-        position="bottom-right"
-        theme="colored"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
       <div className="bg-gray-50 py-4">
         <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
         <div className="container lg:px-24 mx-auto">

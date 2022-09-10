@@ -13,7 +13,6 @@ const OrderId = ({ order, mrp, dis, dCharge }) => {
   };
 
   useEffect(() => {
-    console.log(order);
     if (getCookie("isLoggedIn") !== true) {
       router.push("/signin");
     }

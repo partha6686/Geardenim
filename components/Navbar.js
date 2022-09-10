@@ -84,16 +84,19 @@ const Navbar = () => {
                   onMouseLeave={() => setDropdown(false)}
                 >
                   <div className="border-b-2 border-emerald-100 px-4 pb-2 cursor-pointer">
-                    {userCtx.isLoggedIn ? (
+                    {userCtx.isLoggedIn && userCtx.user ? (
                       <Link href={"/profile"} passHref={true}>
                         <div>
                           <div className="font-semibold text-black">
                             Hello{" "}
-                            {userCtx.user.name &&
+                            {userCtx.user &&
+                              userCtx.user.name &&
                               userCtx.user.name.split(" ")[0]}
                           </div>
                           <div className="text-sm leading-3">
-                            {userCtx.user.email && userCtx.user.email}
+                            {userCtx.user &&
+                              userCtx.user.email &&
+                              userCtx.user.email}
                           </div>
                         </div>
                       </Link>
@@ -207,9 +210,12 @@ const Navbar = () => {
         className="w-72 sm:w-96 fixed top-0 left-0 bg-cust_white z-50 transform transition-transform -translate-x-full"
       >
         <div className="p-4 bg-cust_green text-cust_white text-2xl font-bold flex items-center justify-between">
-          {userCtx.isLoggedIn ? (
+          {userCtx.isLoggedIn && userCtx.user ? (
             <h2 className="cursor-pointer">
-              Hello, {userCtx.user.name && userCtx.user.name.split(" ")[0]}
+              Hello,{" "}
+              {userCtx.user &&
+                userCtx.user.name &&
+                userCtx.user.name.split(" ")[0]}
             </h2>
           ) : (
             <h2>Welcome</h2>

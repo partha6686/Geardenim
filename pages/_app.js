@@ -6,6 +6,8 @@ import CartState from "../store/CartState";
 import UserState from "../store/UserState";
 import { useRouter } from "next/router";
 import LoadingBar from "react-top-loading-bar";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function MyApp({ Component, pageProps }) {
   const [progress, setProgress] = useState(0);
@@ -29,6 +31,18 @@ function MyApp({ Component, pageProps }) {
   return (
     <UserState>
       <CartState>
+        <ToastContainer
+          position="bottom-right"
+          theme="colored"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <LoadingBar
           color="#34d399"
           progress={progress}

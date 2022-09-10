@@ -9,7 +9,7 @@ import {
   BsXCircleFill,
 } from "react-icons/bs";
 import { CartContext } from "../../store/CartState";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Product = ({ product }) => {
@@ -105,18 +105,6 @@ const Product = ({ product }) => {
 
   return (
     <>
-      <ToastContainer
-        position="bottom-right"
-        theme="colored"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
       <section className=" body-font overflow-hidden">
         <div className="container px-5 py-10 mx-auto">
           <div className="lg:w-5/6 mx-auto flex flex-wrap">

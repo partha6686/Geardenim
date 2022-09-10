@@ -14,6 +14,7 @@ const Card = ({ product }) => {
               alt="product"
               layout="fill"
               objectFit="contain"
+              quality="25"
             />
           </div>
           <div className="relative">

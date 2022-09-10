@@ -8,10 +8,16 @@ const useForm = (callback) => {
   const [values, setValues] = useState({
     custName: "",
     phone: "",
+    email: "",
     address: "",
     pincode: "",
     city: "",
     state: "",
+    dob: "",
+    gender: "",
+    password: "",
+    cpassword: "",
+    curpassword: "",
   });
   const [errors, setErrors] = useState({
     custName: "",
@@ -27,8 +33,23 @@ const useForm = (callback) => {
       setValues({
         ...values,
         custName: userCtx.user.name,
+        email: userCtx.user.email,
+        phone: userCtx.user.phone,
+        address: userCtx.user.address,
+        pincode: userCtx.user.pincode,
+        city: userCtx.user.city,
+        state: userCtx.user.state,
+        dob: userCtx.user.dob,
+        gender: userCtx.user.gender,
       });
-      let newObj = omit(errors, "custName");
+      let newObj = omit(errors, [
+        userCtx.user.name && "custName",
+        userCtx.user.phone && "phone",
+        userCtx.user.address && "address",
+        userCtx.user.pincode && "pincode",
+        userCtx.user.city && "city",
+        userCtx.user.state && "state",
+      ]);
       setErrors(newObj);
     }
   }, [userCtx.user._id]);
@@ -96,7 +117,6 @@ const useForm = (callback) => {
           );
           const pinsJson = await pins.json();
           if (pinsJson[0].Status == "Success") {
-            // console.log(pinsJson[value.trim()][0], pinsJson[value.trim()][1]);
             setValues({
               ...values,
               city: pinsJson[0].PostOffice[0].District,
@@ -136,6 +156,17 @@ const useForm = (callback) => {
           setErrors(newObj);
         }
         break;
+      case "curpassword":
+        if (!value.trim()) {
+          setErrors({
+            ...errors,
+            curpassword: "Current Password Can not br Empty",
+          });
+        } else {
+          let newObj = omit(errors, "curpassword");
+          setErrors(newObj);
+        }
+        break;
       case "password":
         if (
           !new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/).test(value)
@@ -150,13 +181,46 @@ const useForm = (callback) => {
           setErrors(newObj);
         }
         break;
-
+      case "cpassword":
+        if (values.password !== value) {
+          setErrors({
+            ...errors,
+            cpassword: "Password and Confirm Password does not match",
+          });
+        } else {
+          let newObj = omit(errors, "cpassword");
+          setErrors(newObj);
+        }
+        break;
+      case "dob":
+        if (
+          !new RegExp(/^([0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4})$/).test(value.trim())
+        ) {
+          setErrors({
+            ...errors,
+            dob: "Please enter date in the specified format",
+          });
+        } else {
+          let newObj = omit(errors, "dob");
+          setErrors(newObj);
+        }
+        break;
+      case "gender":
+        if (!new RegExp(/^([M]{1}|[F]{1}|NA)$/).test(value.trim())) {
+          setErrors({
+            ...errors,
+            gender: "Please enter M , F, or NA.",
+          });
+        } else {
+          let newObj = omit(errors, "gender");
+          setErrors(newObj);
+        }
+        break;
       default:
         break;
     }
   };
 
-  //A method to handle form inputs
   const handleChange = (event) => {
     //To stop default events
     event.persist();
@@ -165,7 +229,7 @@ const useForm = (callback) => {
     let val = event.target.value;
 
     validate(event, name, val);
-    //Let's set these values in state
+
     if (name !== "pincode") {
       setValues({
         ...values,
@@ -179,8 +243,6 @@ const useForm = (callback) => {
 
     if (Object.keys(errors).length === 0 && Object.keys(values).length !== 0) {
       callback();
-    } else {
-      alert("There is an Error!");
     }
   };
 
@@ -189,6 +251,7 @@ const useForm = (callback) => {
     errors,
     handleChange,
     handleSubmit,
+    setValues,
   };
 };
 
