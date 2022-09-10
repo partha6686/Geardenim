@@ -11,6 +11,7 @@ import {
 import { CartContext } from "../../store/CartState";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Head from "next/head";
 
 const Product = ({ product }) => {
   const cartCtx = useContext(CartContext);
@@ -105,8 +106,11 @@ const Product = ({ product }) => {
 
   return (
     <>
-      <section className=" body-font overflow-hidden">
-        <div className="container px-5 py-10 mx-auto">
+      <Head>
+        <title>{product.title} - Geardenim.com</title>
+      </Head>
+      <section className="body-font overflow-hidden ">
+        <div className="container px-5 py-10 mx-auto min-h-screen">
           <div className="lg:w-5/6 mx-auto flex flex-wrap">
             <div className="lg:py-6 w-full lg:w-1/2 h-72 lg:h-auto max-h-[60vh]">
               <div className="relative text-center w-full h-full ">

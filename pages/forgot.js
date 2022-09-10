@@ -4,6 +4,7 @@ import Image from "next/image";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { useRouter } from "next/router";
 import { getCookie } from "cookies-next";
+import Head from "next/head";
 
 const Forgot = () => {
   const router = useRouter();
@@ -14,6 +15,9 @@ const Forgot = () => {
   }, []);
   return (
     <div>
+      <Head>
+        <title>Forgot Password - Geardenim.com</title>
+      </Head>
       <div className="h-screen flex justify-center items-center bg-gray-50">
         <form
           className="w-11/12 sm:w-4/6 md:w-3/6 max-w-md px-6 sm:px-10 py-10 bg-white rounded-xl drop-shadow-lg"

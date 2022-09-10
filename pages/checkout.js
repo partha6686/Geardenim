@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import Script from "next/script";
 import { BsBagCheckFill, BsInfoCircle } from "react-icons/bs";
 import { CartContext } from "../store/CartState";
@@ -9,6 +8,7 @@ import { getCookie } from "cookies-next";
 import useForm from "../Hooks/useForm";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Head from "next/head";
 
 const Checkout = ({ pinsJson }) => {
   const cartCtx = useContext(CartContext);
@@ -129,7 +129,10 @@ const Checkout = ({ pinsJson }) => {
 
   return (
     <>
-      <div className="bg-gray-50 py-4">
+      <Head>
+        <title>Checkout - Geardenim.com</title>
+      </Head>
+      <div className="bg-gray-50 py-4 min-h-screen">
         <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
         <div className="container lg:px-24 mx-auto">
           <h2 className=" text-2xl font-bold my-4 text-gray-800 mx-2">

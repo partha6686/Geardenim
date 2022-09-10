@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { getCookie } from "cookies-next";
 import { CartContext } from "../../store/CartState";
+import Head from "next/head";
 
 const TransactionSuccess = ({ status, oid }) => {
   const router = useRouter();
@@ -23,6 +24,9 @@ const TransactionSuccess = ({ status, oid }) => {
 
   return (
     <>
+      <Head>
+        <title>Your Payment is Successfull - Geardenim.com</title>
+      </Head>
       {status !== "pending" && (
         <div className="bg-gray-50 flex items-center justify-center h-[85vh] min-h-fit">
           <div className="container bg-white mx-auto w-11/12 max-w-lg text-center pt-16 pb-12 rounded-lg shadow-lg">

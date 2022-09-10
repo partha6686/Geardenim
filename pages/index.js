@@ -9,9 +9,9 @@ import { TbHeadset } from "react-icons/tb";
 
 export default function Home() {
   return (
-    <div className="bg-cust_light">
+    <div className="bg-cust_light min-h-screen">
       <Head>
-        <title>GearDenim</title>
+        <title>GearDenim.com</title>
         <meta
           name="description"
           content="Geardenim.com - Gear up for the biggest ride of your life"

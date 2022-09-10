@@ -4,14 +4,18 @@ import CartCard from "../components/CartCard";
 import { BsBagCheckFill } from "react-icons/bs";
 import { CartContext } from "../store/CartState";
 import Image from "next/image";
+import Head from "next/head";
 
 const Cart = () => {
   const cartCtx = useContext(CartContext);
 
   return (
     <>
+      <Head>
+        <title>Cart - Geardenim.com</title>
+      </Head>
       {cartCtx.cart.length > 0 ? (
-        <div className="bg-cust_light ">
+        <div className="bg-cust_light min-h-screen">
           <div className="container mx-auto lg:px-24 py-4">
             <h1 className="text-lg sm:text-2xl font-bold mx-2 my-2 sm:my-4 text-gray-800">
               SHOPPING CART

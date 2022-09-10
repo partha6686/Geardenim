@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { AiOutlineLogin } from "react-icons/ai";
 import { UserContext } from "../store/UserState";
 import { getCookie } from "cookies-next";
+import Head from "next/head";
 
 const Signin = () => {
   const userCtx = useContext(UserContext);
@@ -18,8 +19,7 @@ const Signin = () => {
     if (getCookie("isLoggedIn") == true) {
       router.push("/");
     }
-  }, [])
-  
+  }, []);
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -49,6 +49,9 @@ const Signin = () => {
 
   return (
     <div>
+      <Head>
+        <title>Sign In - Geardenim.com</title>
+      </Head>
       <div className="h-screen flex justify-center items-center bg-gray-50">
         <form
           onSubmit={handleSubmit}

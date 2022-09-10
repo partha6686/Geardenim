@@ -6,6 +6,7 @@ import EditModal from "../components/EditModal";
 import useForm from "../Hooks/useForm";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Head from "next/head";
 
 const Profile = () => {
   const router = useRouter();
@@ -119,88 +120,95 @@ const Profile = () => {
   const { handleChange, values, errors, handleSubmit } = useForm(handleEdit);
   const passC = useForm(handlePassC);
   return (
-    <div className="bg-cust_light ">
-      {showModal && (
-        <EditModal
-          setShowModal={setShowModal}
-          handleChange={handleChange}
-          values={values}
-          errors={errors}
-          handleSubmit={handleSubmit}
-          passC={passC}
-        />
-      )}
-      <div className="container mx-auto lg:px-24 py-4">
-        <h1 className="text-2xl font-bold mt-4 mx-2">PROFILE DETAILS</h1>
-        <div className="bg-white p-2 md:p-6 shadow-lg my-8 rounded-lg m-2">
-          <div className="flex flex-col md:flex-row mb-1">
-            <div className="w-full md:w-7/12">
-              <h2 className="text-lg font-semibold mb-2">
-                1. General Information
-              </h2>
-              <table className="mx-4 border-separate border-spacing-y-4 ">
-                <tbody>
-                  <tr>
-                    <td className="pr-12 font-semibold ">Full Name: </td>
-                    <td>{userCtx.user.name && userCtx.user.name}</td>
-                  </tr>
-                  <tr>
-                    <td className="pr-12 font-semibold ">Email: </td>
-                    <td>{userCtx.user.email && userCtx.user.email}</td>
-                  </tr>
-                  <tr>
-                    <td className="pr-12 font-semibold ">Mobile Number: </td>
-                    <td>
-                      {userCtx.user.phone ? userCtx.user.phone : "--Not Set--"}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="pr-12 font-semibold ">DOB: </td>
-                    <td>
-                      {" "}
-                      {userCtx.user.dob ? userCtx.user.dob : "--Not Set--"}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="pr-12 font-semibold ">Gender: </td>
-                    <td>
-                      {" "}
-                      {userCtx.user.gender
-                        ? userCtx.user.gender
-                        : "--Not Set--"}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+    <>
+      <Head>
+        <title>Profile - Geardenim.com</title>
+      </Head>
+      <div className="bg-cust_light min-h-screen">
+        {showModal && (
+          <EditModal
+            setShowModal={setShowModal}
+            handleChange={handleChange}
+            values={values}
+            errors={errors}
+            handleSubmit={handleSubmit}
+            passC={passC}
+          />
+        )}
+        <div className="container mx-auto lg:px-24 py-4">
+          <h1 className="text-2xl font-bold mt-4 mx-2">PROFILE DETAILS</h1>
+          <div className="bg-white p-2 md:p-6 shadow-lg my-8 rounded-lg m-2">
+            <div className="flex flex-col md:flex-row mb-1">
+              <div className="w-full md:w-7/12">
+                <h2 className="text-lg font-semibold mb-2">
+                  1. General Information
+                </h2>
+                <table className="mx-4 border-separate border-spacing-y-4 ">
+                  <tbody>
+                    <tr>
+                      <td className="pr-12 font-semibold ">Full Name: </td>
+                      <td>{userCtx.user.name && userCtx.user.name}</td>
+                    </tr>
+                    <tr>
+                      <td className="pr-12 font-semibold ">Email: </td>
+                      <td>{userCtx.user.email && userCtx.user.email}</td>
+                    </tr>
+                    <tr>
+                      <td className="pr-12 font-semibold ">Mobile Number: </td>
+                      <td>
+                        {userCtx.user.phone
+                          ? userCtx.user.phone
+                          : "--Not Set--"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="pr-12 font-semibold ">DOB: </td>
+                      <td>
+                        {" "}
+                        {userCtx.user.dob ? userCtx.user.dob : "--Not Set--"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="pr-12 font-semibold ">Gender: </td>
+                      <td>
+                        {" "}
+                        {userCtx.user.gender
+                          ? userCtx.user.gender
+                          : "--Not Set--"}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="md:flex-grow">
+                <h2 className="text-lg font-semibold mb-2">2. Address</h2>
+                {userCtx.user.address ? (
+                  <div className="max-w-md mx-4">
+                    {userCtx.user.address && userCtx.user.address}
+                    <br />
+                    {userCtx.user.city && `${userCtx.user.city},`}
+                    <br />
+                    {userCtx.user.state && `${userCtx.user.state}-`}
+                    {userCtx.user.pincode && userCtx.user.pincode}
+                  </div>
+                ) : (
+                  <div className="max-w-md h-24 border-dashed border-cust_green border-2 flex items-center justify-center text-cust_green mx-4">
+                    Add you Address
+                  </div>
+                )}
+              </div>
             </div>
-            <div className="md:flex-grow">
-              <h2 className="text-lg font-semibold mb-2">2. Address</h2>
-              {userCtx.user.address ? (
-                <div className="max-w-md mx-4">
-                  {userCtx.user.address && userCtx.user.address}
-                  <br />
-                  {userCtx.user.city && `${userCtx.user.city},`}
-                  <br />
-                  {userCtx.user.state && `${userCtx.user.state}-`}
-                  {userCtx.user.pincode && userCtx.user.pincode}
-                </div>
-              ) : (
-                <div className="max-w-md h-24 border-dashed border-cust_green border-2 flex items-center justify-center text-cust_green mx-4">
-                  Add you Address
-                </div>
-              )}
-            </div>
+            <hr />
+            <button
+              className="px-5 py-2 bg-cust_green text-white mt-4"
+              onClick={() => setShowModal(true)}
+            >
+              Edit Details
+            </button>
           </div>
-          <hr />
-          <button
-            className="px-5 py-2 bg-cust_green text-white mt-4"
-            onClick={() => setShowModal(true)}
-          >
-            Edit Details
-          </button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
