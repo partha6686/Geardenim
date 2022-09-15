@@ -119,8 +119,18 @@ const Checkout = ({ pinsJson }) => {
     }
   };
 
-  const { handleChange, values, errors, handleSubmit } =
-    useForm(initiatePayment);
+  const { handleChange, values, errors, handleSubmit } = useForm(
+    {
+      custName: "",
+      phone: "",
+      address: "",
+      pincode: "",
+      city: "",
+      state: "",
+    },
+    initiatePayment
+  );
+  console.log(errors);
   useEffect(() => {
     if (getCookie("isLoggedIn") !== true) {
       router.push("/signin");

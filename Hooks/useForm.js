@@ -2,31 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 import { omit } from "lodash";
 import { UserContext } from "../store/UserState";
 
-const useForm = (callback) => {
+const useForm = (initObj, callback) => {
   const userCtx = useContext(UserContext);
 
-  const [values, setValues] = useState({
-    custName: "",
-    phone: "",
-    email: "",
-    address: "",
-    pincode: "",
-    city: "",
-    state: "",
-    dob: "",
-    gender: "",
-    password: "",
-    cpassword: "",
-    curpassword: "",
-  });
-  const [errors, setErrors] = useState({
-    custName: "",
-    phone: "",
-    address: "",
-    pincode: "",
-    city: "",
-    state: "",
-  });
+  const [values, setValues] = useState(initObj);
+  const [errors, setErrors] = useState(initObj);
 
   useEffect(() => {
     if (userCtx.user.name) {

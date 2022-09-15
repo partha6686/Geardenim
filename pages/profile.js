@@ -117,8 +117,25 @@ const Profile = () => {
     }
   };
 
-  const { handleChange, values, errors, handleSubmit } = useForm(handleEdit);
-  const passC = useForm(handlePassC);
+  const { handleChange, values, errors, handleSubmit } = useForm(
+    {
+      name: "",
+      gender: "",
+      address: "",
+      pincode: "",
+      phone: "",
+      dob: "",
+    },
+    handleEdit
+  );
+  const passC = useForm(
+    {
+      curpassword: "",
+      password: "",
+      cpassword: "",
+    },
+    handlePassC
+  );
   return (
     <>
       <Head>
