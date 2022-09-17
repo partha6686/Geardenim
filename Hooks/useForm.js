@@ -17,8 +17,8 @@ const useForm = (initObj, callback) => {
         phone: userCtx.user.phone,
         address: userCtx.user.address,
         pincode: userCtx.user.pincode,
-        city: userCtx.user.city,
-        state: userCtx.user.state,
+        city: userCtx.user.city ? userCtx.user.city : "",
+        state: userCtx.user.state ? userCtx.user.state : "",
         dob: userCtx.user.dob,
         gender: userCtx.user.gender,
       });
@@ -220,6 +220,7 @@ const useForm = (initObj, callback) => {
 
   const handleSubmit = (event) => {
     if (event) event.preventDefault();
+    console.log("called");
 
     if (Object.keys(errors).length === 0 && Object.keys(values).length !== 0) {
       callback();

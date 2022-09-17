@@ -1,6 +1,7 @@
 import User from "../../models/User";
 import connectDb from "../../middleware/db";
 import fetchUser from "../../middleware/fetchUser";
+const https = require("https");
 
 const handler = async (req, res) => {
   try {

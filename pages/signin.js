@@ -6,14 +6,14 @@ import { AiOutlineLogin } from "react-icons/ai";
 import { UserContext } from "../store/UserState";
 import { getCookie } from "cookies-next";
 import Head from "next/head";
+import { toast } from "react-toastify";
+import useForm from "../Hooks/useForm";
+import { BsInfoCircle } from "react-icons/bs";
 
 const Signin = () => {
   const userCtx = useContext(UserContext);
   const router = useRouter();
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-  });
+  const [processing, setProcessing] = useState(false);
 
   useEffect(() => {
     if (getCookie("isLoggedIn") == true) {
@@ -21,31 +21,55 @@ const Signin = () => {
     }
   }, []);
 
-  const handleChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleLogin = async () => {
+    setProcessing(true);
     const response = await fetch(`${process.env.HOST}login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: user.email,
-        password: user.password,
+        email: values.email,
+        password: values.password,
       }),
     });
     const json = await response.json();
     if (response.status === 200) {
       userCtx.setIsLoggedIn(true);
+      toast.success(json.msg, {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        toastId: "login-success",
+      });
       router.push("/");
     } else {
       userCtx.setIsLoggedIn(false);
+      toast.error(json.error, {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        toastId: "login-failure",
+      });
     }
-    console.log(json);
+    setProcessing(false);
   };
+
+  const { handleChange, values, errors, handleSubmit } = useForm(
+    {
+      email: "",
+      password: "",
+    },
+    handleLogin
+  );
 
   return (
     <div>
@@ -84,8 +108,15 @@ const Signin = () => {
               name="email"
               id="email"
               onChange={handleChange}
-              value={user.email}
+              value={values.email}
             />
+            {errors.email && (
+              <div className="relative">
+                <div className="absolute top-0 left-0 text-rose-600 text-xs py-1  w-full flex items-center">
+                  <BsInfoCircle className=" mr-1 font-bold" /> {errors.email}
+                </div>
+              </div>
+            )}
           </div>
           <div className="my-4">
             <input
@@ -95,24 +126,29 @@ const Signin = () => {
               name="password"
               id="password"
               onChange={handleChange}
-              value={user.password}
+              value={values.password}
             />
-          </div>
-
-          <div className="flex justify-start items-center ">
-            <input type="checkbox" name="remember" id="remember" />
-            <label className="text-sm text-gray-500 ml-1" htmlFor="remember">
-              Remember me
-            </label>
+            {errors.password && (
+              <div className="relative h-6">
+                <div className="absolute top-0 left-0 text-rose-600 text-xs py-1  w-full flex items-baseline">
+                  <BsInfoCircle className=" mr-1 font-bold" /> {errors.password}
+                </div>
+              </div>
+            )}
           </div>
 
           <button
             className="my-4 w-full px-10 py-2 bg-cust_green text-white 
-          hover:bg-emerald-600 hover:drop-shadow-md duration-300 ease-in flex justify-center items-center"
+          hover:bg-emerald-600 hover:drop-shadow-md duration-300 ease-in flex justify-center items-center disabled:bg-emerald-300"
             type="submit"
+            disabled={Object.keys(errors).length !== 0 ? true : false}
           >
+            {processing ? (
+              <Image src="/FormSpinner.svg" height={25} width={25} />
+            ) : (
+              <AiOutlineLogin className="mr-2" />
+            )}
             Sign In
-            <AiOutlineLogin className="ml-2" />
           </button>
 
           <p className="text-right text-cust_green">

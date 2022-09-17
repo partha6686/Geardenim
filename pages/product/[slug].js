@@ -207,7 +207,7 @@ const Product = ({ product }) => {
                       .length == 0
                       ? "bg-emerald-200"
                       : "bg-cust_green"
-                  }  py-2 my-2 mr-2 text-cust_white font-semibold`}
+                  }  py-2 my-2 mx-2 text-cust_white font-semibold`}
                   onClick={handleAddToCart}
                   disabled={
                     product.availability.filter((item) => item.qty > 0)
@@ -227,7 +227,7 @@ const Product = ({ product }) => {
                       .length == 0
                       ? "bg-emerald-200"
                       : "bg-cust_green"
-                  }  py-2 my-2 ml-2 text-cust_white font-semibold `}
+                  }  py-2 my-2 mx-2 text-cust_white font-semibold `}
                   onClick={handleBuyNow}
                   disabled={
                     product.availability.filter((item) => item.qty > 0)

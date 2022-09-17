@@ -4,12 +4,12 @@ const UserSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    gender: { type: String, enum: ["M", "F", "N/A"] },
+    gender: { type: String, enum: ["M", "F", "N/A", ""], default: "" },
     password: { type: String, required: true },
-    address: { type: String },
-    phone: { type: String },
-    pincode: { type: String },
-    dob: { type: String },
+    address: { type: String, default: "" },
+    phone: { type: String, default: "" },
+    pincode: { type: String, default: "" },
+    dob: { type: String, default: "" },
   },
   { timestamps: true }
 );

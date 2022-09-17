@@ -119,12 +119,14 @@ const Profile = () => {
 
   const { handleChange, values, errors, handleSubmit } = useForm(
     {
-      name: "",
+      custName: "",
       gender: "",
       address: "",
       pincode: "",
       phone: "",
       dob: "",
+      city: "",
+      state: "",
     },
     handleEdit
   );

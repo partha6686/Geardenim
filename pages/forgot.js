@@ -42,7 +42,7 @@ const Forgot = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        toastId: "profile-update-success",
+        toastId: "forgot-success",
       });
       setSentMail(true);
     } else {
@@ -54,7 +54,7 @@ const Forgot = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        toastId: "profile-update-failure",
+        toastId: "forgot-failure",
       });
     }
     setProcessing(false);
@@ -83,7 +83,7 @@ const Forgot = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        toastId: "profile-update-success",
+        toastId: "password-change-success",
       });
       router.push("/signin");
     } else {
@@ -95,7 +95,7 @@ const Forgot = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        toastId: "profile-update-failure",
+        toastId: "password-change-failure",
       });
     }
   };
