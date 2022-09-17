@@ -261,8 +261,9 @@ const EditModal = ({
             </div>
             <hr />
             <button
-              className="px-5 py-2 bg-cust_green text-white mt-4 mx-4"
+              className="px-5 py-2 bg-cust_green text-white mt-4 mx-4 disabled:bg-emerald-300 focus:outline-none hover:bg-emerald-600"
               onClick={handleSubmit}
+              disabled={Object.keys(errors).length > 0 ? true : false}
             >
               Edit Details
             </button>
@@ -314,7 +315,7 @@ const EditModal = ({
                   value={passC.values.password}
                 />
                 {passC.errors.password && (
-                  <div className="relative">
+                  <div className="relative h-4">
                     <div className="absolute top-0 left-0 text-rose-600 text-xs py-1  w-full flex items-center">
                       <BsInfoCircle className=" mr-1 font-bold" />{" "}
                       {passC.errors.password}
@@ -338,7 +339,7 @@ const EditModal = ({
                   value={passC.values.cpassword}
                 />
                 {passC.errors.cpassword && (
-                  <div className="relative">
+                  <div className="relative h-2">
                     <div className="absolute top-0 left-0 text-rose-600 text-xs py-1 w-full flex items-center">
                       <BsInfoCircle className=" mr-1 text-bold" />
                       <div>{passC.errors.cpassword}</div>
@@ -349,9 +350,9 @@ const EditModal = ({
             </form>
             <hr />
             <button
-              className="px-5 py-2 bg-cust_green text-white mt-4 mx-4"
+              className="px-5 py-2 bg-cust_green text-white mt-4 mx-4 disabled:bg-emerald-300 focus:outline-none hover:bg-emerald-600"
               onClick={passC.handleSubmit}
-              disabled={Object.keys(errors).length !== 0 ? true : false}
+              disabled={Object.keys(passC.errors).length !== 0 ? true : false}
             >
               Change Password
             </button>

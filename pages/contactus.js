@@ -157,7 +157,7 @@ const Contacts = () => {
           </div>
           <div className="p-2 w-full">
             <button
-              className="flex mx-auto text-white bg-cust_green border-0 py-2 px-8 focus:outline-none hover:bg-emerald-600 rounded text-lg items-center disabled:bg-emerald-300"
+              className="flex mx-auto text-white bg-cust_green border-0 py-2 px-8 focus:outline-none hover:bg-emerald-600 text-lg items-center disabled:bg-emerald-300"
               onClick={handleSubmit}
               disabled={Object.keys(errors).length > 0 ? true : false}
             >

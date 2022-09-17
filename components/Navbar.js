@@ -8,11 +8,13 @@ import { AiOutlineClose, AiOutlineUser } from "react-icons/ai";
 import { CartContext } from "../store/CartState";
 import { UserContext } from "../store/UserState";
 import { getCookie } from "cookies-next";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
   const [dropdown, setDropdown] = useState(false);
   const cartCtx = useContext(CartContext);
   const userCtx = useContext(UserContext);
+  const router = useRouter();
 
   useEffect(() => {
     cartCtx.getCart();
@@ -23,6 +25,18 @@ const Navbar = () => {
     }
     userCtx.fetchUser();
   }, [getCookie("isLoggedIn")]);
+
+  useEffect(() => {
+    setSidebar(false);
+    if (ref.current.classList.contains("-translate-x-0")) {
+      ref.current.classList.remove("-translate-x-0");
+      ref.current.classList.add("-translate-x-full");
+    }
+    // else {
+    //   ref.current.classList.remove("-translate-x-0");
+    //   ref.current.classList.add("-translate-x-full");
+    // }
+  }, [router.asPath]);
 
   const ref = useRef();
   const [sidebar, setSidebar] = useState(false);
@@ -36,6 +50,7 @@ const Navbar = () => {
       ref.current.classList.add("-translate-x-full");
     }
   };
+
   return (
     <>
       <div className="sticky top-0 left-0 right-0 z-20 shadow-lg">
