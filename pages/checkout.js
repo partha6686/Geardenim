@@ -113,7 +113,6 @@ const Checkout = ({ pinsJson }) => {
           progress: undefined,
           toastId: "select-size-error",
         });
-        console.log(json);
         setRzpProcessing(false);
       }
     }
@@ -130,7 +129,6 @@ const Checkout = ({ pinsJson }) => {
     },
     initiatePayment
   );
-  console.log(errors);
   useEffect(() => {
     if (getCookie("isLoggedIn") !== true) {
       router.push("/signin");

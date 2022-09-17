@@ -24,11 +24,14 @@ const useForm = (initObj, callback) => {
       });
       let newObj = omit(errors, [
         userCtx.user.name && "custName",
+        userCtx.user.email && "email",
         userCtx.user.phone && "phone",
         userCtx.user.address && "address",
         userCtx.user.pincode && "pincode",
         userCtx.user.city && "city",
         userCtx.user.state && "state",
+        userCtx.user.dob && "dob",
+        userCtx.user.gender && "gender",
       ]);
       setErrors(newObj);
     }
@@ -196,6 +199,17 @@ const useForm = (initObj, callback) => {
           setErrors(newObj);
         }
         break;
+      case "message":
+        if (value.trim().length <= 4) {
+          setErrors({
+            ...errors,
+            message: "Message must have atleast 5 letters",
+          });
+        } else {
+          let newObj = omit(errors, "message");
+          setErrors(newObj);
+        }
+        break;
       default:
         break;
     }
@@ -220,7 +234,6 @@ const useForm = (initObj, callback) => {
 
   const handleSubmit = (event) => {
     if (event) event.preventDefault();
-    console.log("called");
 
     if (Object.keys(errors).length === 0 && Object.keys(values).length !== 0) {
       callback();

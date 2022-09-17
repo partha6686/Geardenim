@@ -130,17 +130,17 @@ const Navbar = () => {
                     </div>
                   </Link>
 
-                  <Link href={"/coupons"}>
+                  <Link href={"/todo"}>
                     <div className="px-4 hover:bg-cust_green hover:text-white  leading-8 cursor-pointer">
                       Coupons
                     </div>
                   </Link>
-                  <Link href={"/myaddress"}>
+                  <Link href={"/todo"}>
                     <div className="px-4 hover:bg-cust_green hover:text-white  leading-8 cursor-pointer">
                       Saved Addresses
                     </div>
                   </Link>
-                  <Link href={"/mycards"}>
+                  <Link href={"/todo"}>
                     <div className="px-4 hover:bg-cust_green hover:text-white leading-8 cursor-pointer">
                       Saved Cards
                     </div>
@@ -228,17 +228,17 @@ const Navbar = () => {
         <div className="h-screen overflow-scroll pb-14">
           <div className="my-3">
             <h3 className="py-2 my-1 text-xl font-semibold pl-4">Trending</h3>
-            <Link href="/shop/best-sellers">
+            <Link href="/todo">
               <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer ">
                 Best Sellers
               </div>
             </Link>
-            <Link href="/shop/deals-of-the-week">
+            <Link href="/todo">
               <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                 Deals of the week
               </div>
             </Link>
-            <Link href="/shop/new-releases">
+            <Link href="/todo">
               <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                 New Releases
               </div>
@@ -283,22 +283,22 @@ const Navbar = () => {
             <h3 className="py-2 my-1 text-xl font-semibold pl-4">
               Shop by Brands
             </h3>
-            <Link href="/shop/brand/bmw">
+            <Link href="/todo">
               <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                 BMW
               </div>
             </Link>
-            <Link href="/shop/brand/ktm">
+            <Link href="/todo">
               <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                 KTM
               </div>
             </Link>
-            <Link href="/shop/brand/kawasaki">
+            <Link href="/todo">
               <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                 Kawasaki
               </div>
             </Link>
-            <Link href="/shop/brand/royal-enfield">
+            <Link href="/todo">
               <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                 Royal Enfield
               </div>
