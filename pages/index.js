@@ -61,7 +61,7 @@ export default function Home() {
                   Gear up for the biggest ride of your life with geardenim.com
                 </p>
                 <div className="flex mt-6 justify-center">
-                  <div className="w-16 h-1 rounded-full bg-indigo-500 inline-flex"></div>
+                  <div className="w-16 h-1 rounded-full bg-cust_green inline-flex"></div>
                 </div>
               </div>
               <div className="flex flex-wrap flex-col md:flex-row sm:-m-4 -mx-4 -mb-10 -mt-4 md:space-y-0 space-y-6">
