@@ -20,6 +20,7 @@ const TransactionSuccess = ({ status, oid }) => {
     } else if (status == "paid") {
       cartCtx.clearCart();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -133,6 +133,7 @@ const Checkout = ({ pinsJson }) => {
     if (getCookie("isLoggedIn") !== true) {
       router.push("/signin");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getCookie("isLoggedIn")]);
 
   return (
@@ -332,7 +333,12 @@ const Checkout = ({ pinsJson }) => {
                   {rzpProcessing == null || rzpProcessing == false ? (
                     <BsBagCheckFill className="text-lg mx-1" />
                   ) : (
-                    <Image src="/FormSpinner.svg" height={35} width={35} />
+                    <Image
+                      src="/FormSpinner.svg"
+                      height={35}
+                      width={35}
+                      alt="form-spinner"
+                    />
                   )}
                   <p>
                     {rzpProcessing

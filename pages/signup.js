@@ -16,6 +16,7 @@ const Signup = () => {
     if (getCookie("isLoggedIn") == true) {
       router.push("/");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const createAccount = async () => {
@@ -189,7 +190,12 @@ const Signup = () => {
             }
           >
             {processing && (
-              <Image src="/FormSpinner.svg" height={25} width={25} />
+              <Image
+                src="/FormSpinner.svg"
+                height={25}
+                width={25}
+                alt="form-spinner"
+              />
             )}
             <span> Sign Up</span>
           </button>

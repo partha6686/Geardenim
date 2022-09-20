@@ -19,6 +19,7 @@ const Signin = () => {
     if (getCookie("isLoggedIn") == true) {
       router.push("/");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleLogin = async () => {
@@ -144,7 +145,7 @@ const Signin = () => {
             disabled={Object.keys(errors).length !== 0 ? true : false}
           >
             {processing ? (
-              <Image src="/FormSpinner.svg" height={25} width={25} />
+              <Image src="/FormSpinner.svg" height={25} width={25} alt="form-spinner" />
             ) : (
               <AiOutlineLogin className="mr-2" />
             )}

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 
@@ -270,11 +270,7 @@ const EditModal = ({
           </div>
         ) : (
           <div className="tab_2">
-            <form
-              className="form px-4 max-h-[70vh]"
-              autoComplete="off"
-              aria-autocomplete="off"
-            >
+            <form className="form px-4 max-h-[70vh]" autoComplete="off">
               <div className="mb-4 mr-4 w-full">
                 <label
                   htmlFor="curpassword"

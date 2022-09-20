@@ -24,6 +24,7 @@ const Navbar = () => {
       userCtx.setIsLoggedIn(false);
     }
     userCtx.fetchUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getCookie("isLoggedIn")]);
 
   useEffect(() => {
@@ -32,10 +33,7 @@ const Navbar = () => {
       ref.current.classList.remove("-translate-x-0");
       ref.current.classList.add("-translate-x-full");
     }
-    // else {
-    //   ref.current.classList.remove("-translate-x-0");
-    //   ref.current.classList.add("-translate-x-full");
-    // }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.asPath]);
 
   const ref = useRef();

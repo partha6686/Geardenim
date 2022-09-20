@@ -17,11 +17,13 @@ const Profile = () => {
     if (getCookie("isLoggedIn") !== true) {
       router.push("/signin");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (showModal) document.body.style.overflowY = "hidden";
     else document.body.style.overflowY = "scroll";
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showModal]);
 
   const handleEdit = async () => {

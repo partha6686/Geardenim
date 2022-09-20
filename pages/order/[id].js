@@ -17,6 +17,7 @@ const OrderId = ({ order, mrp, dis, dCharge }) => {
     if (getCookie("isLoggedIn") !== true) {
       router.push("/signin");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

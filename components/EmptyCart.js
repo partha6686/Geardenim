@@ -13,7 +13,7 @@ const EmptyCart = () => {
           Oops! Your cart is empty!
         </h1>
         <p className="text-gray-500 max-w-xs sm:max-w-sm m-auto">
-          Looks like you haven't added anything to your cart yet.
+          Looks like you have not added anything to your cart yet.
         </p>
         <div className="mt-4 text-cust_green font-semibold hover:underline underline-offset-2">
           <Link href={`/`}>

@@ -13,7 +13,7 @@ const EmptyOrder = () => {
           Oops! Your have not ordered anything yet!
         </h1>
         <p className="text-gray-500 max-w-xs sm:max-w-sm m-auto">
-          Looks like you haven'trdered anything yet. Please shop now and
+          Looks like you have not ordered anything yet. Please shop now and
           view/track your orders here.
         </p>
         <div className="mt-4 text-cust_green font-semibold hover:underline underline-offset-2">

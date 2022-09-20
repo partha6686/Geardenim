@@ -17,6 +17,7 @@ const Forgot = () => {
     if (getCookie("isLoggedIn") == true) {
       router.push("/");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const sendResetMail = async () => {
@@ -169,7 +170,12 @@ const Forgot = () => {
                     }
                   >
                     {processing && (
-                      <Image src="/FormSpinner.svg" height={30} width={30} />
+                      <Image
+                        src="/FormSpinner.svg"
+                        height={30}
+                        width={30}
+                        alt="form-spinner"
+                      />
                     )}
                     {processing ? "Processing..." : "Continue"}
                     {!processing && (
@@ -178,7 +184,7 @@ const Forgot = () => {
                   </button>
                 </form>
               ) : (
-                <form autoComplete="off" aria-autocomplete="off">
+                <form autoComplete="off">
                   <div className="form px-4">
                     <div className="mb-4 mr-4 w-full">
                       <input

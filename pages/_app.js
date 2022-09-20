@@ -20,6 +20,7 @@ function MyApp({ Component, pageProps }) {
     router.events.on("routeChangeComplete", () => {
       setProgress(100);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const showHeader =
