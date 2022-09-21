@@ -127,7 +127,7 @@ const Navbar = () => {
                       </div>
                     )}
                   </div>
-                  <Link href={"/myorders"}>
+                  <Link href={"/orders"}>
                     <div className="px-4 hover:bg-cust_green hover:text-white  leading-8 cursor-pointer">
                       Orders
                     </div>
@@ -326,7 +326,7 @@ const Navbar = () => {
                 Your Account
               </div>
             </Link>
-            <Link href="/myorders">
+            <Link href="/orders">
               <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                 Your Orders
               </div>
