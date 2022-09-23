@@ -13,6 +13,7 @@ const ProductSchema = new mongoose.Schema({
         size: {type: String, required: true},
         qty: {type: Number, required: true}
     }],
+    sales: {type: Number, default: 0}
 },{ timestamps: true });
 
 export default mongoose.models.Product || mongoose.model("Product", ProductSchema)

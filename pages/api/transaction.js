@@ -36,6 +36,7 @@ const handler = async (req, res) => {
             }
             await Product.findByIdAndUpdate(product._id, {
               availability: product.availability,
+              sales: product.sales + item.qty,
             });
           }
           res.status(200).json({ payment: "true" });

@@ -241,7 +241,7 @@ const Navbar = () => {
         <div className="h-screen overflow-scroll pb-14">
           <div className="my-3">
             <h3 className="py-2 my-1 text-xl font-semibold pl-4">Trending</h3>
-            <Link href="/todo">
+            <Link href="/best-sellers">
               <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer ">
                 Best Sellers
               </div>
@@ -326,7 +326,6 @@ const Navbar = () => {
                 Rynox
               </div>
             </Link>
-            
           </div>
           <div className="  my-3">
             <h3 className="py-2 my-1 text-xl font-semibold pl-4">
