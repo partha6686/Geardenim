@@ -25,34 +25,34 @@ const Footer = () => {
           <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
             <div className="lg:w-1/4 md:w-1/2 w-full px-4">
               <h2 className="title-font font-medium text-cust_dark tracking-widest text-sm mb-3">
-                CATEGORIES
+                SHOP
               </h2>
               <nav className="list-none mb-10">
                 <li>
-                  <Link href="/">
+                  <Link href="/shop/suits">
                     <a className="text-cust_light_text hover:text-cust_green">
-                      First Link
+                      Suits
                     </a>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/">
+                  <Link href="/shop/jackets">
                     <a className="text-cust_light_text hover:text-cust_green">
-                      Second Link
+                      Jackets
                     </a>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/">
+                  <Link href="/shop/pants">
                     <a className="text-cust_light_text hover:text-cust_green">
-                      Third Link
+                      Pants
                     </a>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/">
+                  <Link href="/shop/helmets">
                     <a className="text-cust_light_text hover:text-cust_green">
-                      Fourth Link
+                      Helmets
                     </a>
                   </Link>
                 </li>
@@ -60,34 +60,27 @@ const Footer = () => {
             </div>
             <div className="lg:w-1/4 md:w-1/2 w-full px-4">
               <h2 className="title-font font-medium text-cust_dark tracking-widest text-sm mb-3">
-                CATEGORIES
+                POLICY
               </h2>
               <nav className="list-none mb-10">
                 <li>
                   <Link href="/">
                     <a className="text-cust_light_text hover:text-cust_green">
-                      First Link
+                      Privacy Policy
                     </a>
                   </Link>
                 </li>
                 <li>
                   <Link href="/">
                     <a className="text-cust_light_text hover:text-cust_green">
-                      Second Link
+                      Return Policy
                     </a>
                   </Link>
                 </li>
                 <li>
                   <Link href="/">
                     <a className="text-cust_light_text hover:text-cust_green">
-                      Third Link
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/">
-                    <a className="text-cust_light_text hover:text-cust_green">
-                      Fourth Link
+                      T&C
                     </a>
                   </Link>
                 </li>
@@ -95,80 +88,40 @@ const Footer = () => {
             </div>
             <div className="lg:w-1/4 md:w-1/2 w-full px-4">
               <h2 className="title-font font-medium text-cust_dark tracking-widest text-sm mb-3">
-                CATEGORIES
+                CUSTOMER SERVICE
               </h2>
               <nav className="list-none mb-10">
                 <li>
-                  <Link href="/">
+                  <Link href="/contactus">
                     <a className="text-cust_light_text hover:text-cust_green">
-                      First Link
+                      Contact Us
                     </a>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/">
+                  <Link href="/about">
                     <a className="text-cust_light_text hover:text-cust_green">
-                      Second Link
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/">
-                    <a className="text-cust_light_text hover:text-cust_green">
-                      Third Link
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/">
-                    <a className="text-cust_light_text hover:text-cust_green">
-                      Fourth Link
+                      About Us
                     </a>
                   </Link>
                 </li>
               </nav>
             </div>
+
             <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-cust_dark tracking-widest text-sm mb-3">
-                CATEGORIES
-              </h2>
-              <nav className="list-none mb-10">
-                <li>
-                  <Link href="/">
-                    <a className="text-cust_light_text hover:text-cust_green">
-                      First Link
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/">
-                    <a className="text-cust_light_text hover:text-cust_green">
-                      Second Link
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/">
-                    <a className="text-cust_light_text hover:text-cust_green">
-                      Third Link
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/">
-                    <a className="text-cust_light_text hover:text-cust_green">
-                      Fourth Link
-                    </a>
-                  </Link>
-                </li>
-              </nav>
+              <Image
+                src="/secure_payment.jpg"
+                alt="razorpay-secure-payment"
+                height={120}
+                width={220}
+              />
             </div>
           </div>
         </div>
         <div className="bg-cust_light">
           <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
             <p className="text-gray-500 text-sm text-center sm:text-left">
-              © 2022 Geardenim
+              © 2022 Geardenim.com — All Rights Reserved
             </p>
             <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
               <Link href="/">

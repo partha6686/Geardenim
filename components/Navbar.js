@@ -246,12 +246,12 @@ const Navbar = () => {
                 Best Sellers
               </div>
             </Link>
-            <Link href="/todo">
+            <Link href="/best-deals">
               <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
-                Deals of the week
+                Best Deals
               </div>
             </Link>
-            <Link href="/todo">
+            <Link href="/new-releases">
               <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                 New Releases
               </div>
@@ -296,26 +296,37 @@ const Navbar = () => {
             <h3 className="py-2 my-1 text-xl font-semibold pl-4">
               Shop by Brands
             </h3>
-            <Link href="/todo">
+            <Link href="/shop/brand/AXOR">
               <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
-                BMW
+                AXOR
               </div>
             </Link>
-            <Link href="/todo">
+            <Link href="/shop/brand/BBG">
               <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
-                KTM
+                BBG
               </div>
             </Link>
-            <Link href="/todo">
+            <Link href="/shop/brand/MT">
               <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
-                Kawasaki
+                MT
               </div>
             </Link>
-            <Link href="/todo">
+            <Link href="/shop/brand/RS TAICHI">
+              <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
+                RS TAICHI
+              </div>
+            </Link>
+            <Link href="/shop/brand/Royal Enfield">
               <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                 Royal Enfield
               </div>
             </Link>
+            <Link href="/shop/brand/Rynox">
+              <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
+                Rynox
+              </div>
+            </Link>
+            
           </div>
           <div className="  my-3">
             <h3 className="py-2 my-1 text-xl font-semibold pl-4">
