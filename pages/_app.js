@@ -8,6 +8,9 @@ import { useRouter } from "next/router";
 import LoadingBar from "react-top-loading-bar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import theme from "../src/theme/theme";
+import FullLayout from "../src/layouts/FullLayout";
+import { ThemeProvider } from "@mui/material/styles";
 
 function MyApp({ Component, pageProps }) {
   const [progress, setProgress] = useState(0);
@@ -29,32 +32,43 @@ function MyApp({ Component, pageProps }) {
     router.pathname === "/forgot"
       ? false
       : true;
+  const isAdmin = router.pathname.includes("/admin") ? true : false;
   return (
-    <UserState>
-      <CartState>
-        <ToastContainer
-          position="bottom-right"
-          theme="colored"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
-        <LoadingBar
-          color="#34d399"
-          progress={progress}
-          onLoaderFinished={() => setProgress(0)}
-          height={2}
-        />
-        {showHeader && <Navbar />}
-        <Component {...pageProps} />
-        {showHeader && <Footer />}
-      </CartState>
-    </UserState>
+    <>
+      {isAdmin ? (
+        <ThemeProvider theme={theme}>
+          <FullLayout>
+            <Component {...pageProps} />
+          </FullLayout>
+        </ThemeProvider>
+      ) : (
+        <UserState>
+          <CartState>
+            <ToastContainer
+              position="bottom-right"
+              theme="colored"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
+            <LoadingBar
+              color="#34d399"
+              progress={progress}
+              onLoaderFinished={() => setProgress(0)}
+              height={2}
+            />
+            {showHeader && <Navbar />}
+            <Component {...pageProps} />
+            {showHeader && <Footer />}
+          </CartState>
+        </UserState>
+      )}
+    </>
   );
 }
 

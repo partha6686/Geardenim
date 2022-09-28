@@ -3,9 +3,7 @@ import connectDb from "../../middleware/db";
 
 const handler = async (req, res) => {
   try {
-    let products = await (
-      await Product.find().sort({ sales: -1 })
-    ).slice(0, 10);
+    let products = (await Product.find().sort({ sales: -1 })).slice(0, 10);
 
     res.status(200).json(products);
   } catch (error) {
