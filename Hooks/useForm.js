@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { omit } from "lodash";
 import { UserContext } from "../store/UserState";
+import { capitalize } from "lodash";
 
 const useForm = (initObj, callback) => {
   const userCtx = useContext(UserContext);
@@ -210,15 +211,52 @@ const useForm = (initObj, callback) => {
           setErrors(newObj);
         }
         break;
+      case "brand":
+      case "img":
+      case "category":
+      case "size":
+        if (value.trim().length == 0) {
+          setErrors({
+            ...errors,
+            [name]: `${capitalize(name)} can't be empty.`,
+          });
+        } else {
+          let newObj = omit(errors, name);
+          setErrors(newObj);
+        }
+        break;
+      case "title":
+      case "slug":
+      case "desc":
+        if (value.trim().length <= 4) {
+          setErrors({
+            ...errors,
+            [name]: `${capitalize(name)} must have atleast 5 letters`,
+          });
+        } else {
+          let newObj = omit(errors, name);
+          setErrors(newObj);
+        }
+        break;
+      case "qty":
+      case "mrp":
+      case "price":
+        if (!value) {
+          setErrors({
+            ...errors,
+            [name]: `${capitalize(name)} can't be empty.`,
+          });
+        } else {
+          let newObj = omit(errors, name);
+          setErrors(newObj);
+        }
+        break;
       default:
         break;
     }
   };
 
   const handleChange = (event) => {
-    //To stop default events
-    event.persist();
-
     let name = event.target.name;
     let val = event.target.value;
 
@@ -234,7 +272,7 @@ const useForm = (initObj, callback) => {
 
   const handleSubmit = (event) => {
     if (event) event.preventDefault();
-
+    console.log(errors);
     if (Object.keys(errors).length === 0 && Object.keys(values).length !== 0) {
       callback();
     }

@@ -35,14 +35,26 @@ function MyApp({ Component, pageProps }) {
   const isAdmin = router.pathname.includes("/admin") ? true : false;
   return (
     <>
-      {isAdmin ? (
-        <ThemeProvider theme={theme}>
-          <FullLayout>
-            <Component {...pageProps} />
-          </FullLayout>
-        </ThemeProvider>
-      ) : (
-        <UserState>
+      <UserState>
+        {isAdmin ? (
+          <ThemeProvider theme={theme}>
+            <ToastContainer
+              position="bottom-right"
+              theme="colored"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
+            <FullLayout>
+              <Component {...pageProps} />
+            </FullLayout>
+          </ThemeProvider>
+        ) : (
           <CartState>
             <ToastContainer
               position="bottom-right"
@@ -66,8 +78,8 @@ function MyApp({ Component, pageProps }) {
             <Component {...pageProps} />
             {showHeader && <Footer />}
           </CartState>
-        </UserState>
-      )}
+        )}
+      </UserState>
     </>
   );
 }
