@@ -25,7 +25,6 @@ const Add = () => {
   const router = useRouter();
   const [availability, setAvailability] = useState([]);
   const addProduct = async () => {
-    console.log("ADDD");
     const data = {
       ...values,
       availability,

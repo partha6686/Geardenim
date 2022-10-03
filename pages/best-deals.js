@@ -4,7 +4,7 @@ import Card from "../components/Card";
 import _ from "lodash";
 import FourOhFour from "./404";
 
-const NewReleases = ({ products }) => {
+const BestDeals = ({ products }) => {
   if (products.length == 0) {
     return <FourOhFour />;
   } else {
@@ -38,4 +38,4 @@ export async function getServerSideProps() {
   };
 }
 
-export default NewReleases;
+export default BestDeals;

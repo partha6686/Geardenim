@@ -104,6 +104,9 @@ const Product = ({ product }) => {
     });
   };
 
+  // const createMarkup = () => {
+  //   return { __html: product.desc };
+  // };
   return (
     <>
       <Head>
@@ -131,12 +134,12 @@ const Product = ({ product }) => {
                 {product.title}
               </h1>
               <div className="flex mt-2 pb-3 border-b-2 border-cust_grey">
-                <span className="flex items-center border-2 border-cust_grey py-1 px-2">
+                {/*<span className="flex items-center border-2 border-cust_grey py-1 px-2">
                   3.9 <AiFillStar className="text-cust_green ml-1" />
                   <span className="text-gray-600 ml-3 border-l-4 border-cust_grey pl-3">
                     476 Ratings
                   </span>
-                </span>
+                </span>*/}
               </div>
               <div className="my-3">
                 <h2 className="text-lg sm:text-2xl font-semibold text-cust_dark mb-1">
@@ -286,9 +289,9 @@ const Product = ({ product }) => {
                   PRODUCT DETAILS
                   <BsFileText className="ml-2 text-cust_light_text" />
                 </h2>
-                <p className="text-sm text-cust_light_text leading-6">
-                  {product.desc}
-                </p>
+                <div className="text-sm text-cust_light_text leading-6">
+                  <div dangerouslySetInnerHTML={{ __html: product.desc }} />
+                </div>
               </div>
             </div>
           </div>

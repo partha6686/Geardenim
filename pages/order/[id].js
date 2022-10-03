@@ -124,7 +124,6 @@ const OrderId = ({ order, mrp, dis, dCharge }) => {
 };
 
 export async function getServerSideProps(context) {
-  // const cookies = context.req.headers.cookie;
   const { id } = context.query;
   const response = await fetch(`${process.env.HOST}userorders`, {
     method: "GET",

@@ -6,8 +6,9 @@ import { FiTruck } from "react-icons/fi";
 import { BsArrowRepeat } from "react-icons/bs";
 import { TbDiscount2 } from "react-icons/tb";
 import { TbHeadset } from "react-icons/tb";
+import Card from "../components/Card";
 
-export default function Home() {
+export default function Home({ deals, best }) {
   return (
     <div className="bg-cust_light min-h-screen">
       <Head>
@@ -51,6 +52,26 @@ export default function Home() {
           </div>
         </Carousel>
         <div>
+          <div className="container mx-auto sm:p-5 ">
+            <h1 className="text-lg sm:text-2xl font-bold mx-1 sm:mx-6 my-2 sm:my-4 text-gray-800">
+              BEST SELLERS
+            </h1>
+            <div className="flex flex-wrap">
+              {best.map((product) => (
+                <Card key={product._id} product={product} />
+              ))}
+            </div>
+          </div>
+          <div className="container mx-auto sm:p-5 ">
+            <h1 className="text-lg sm:text-2xl font-bold mx-1 sm:mx-6 my-2 sm:my-4 text-gray-800">
+              Min 30% off
+            </h1>
+            <div className="flex flex-wrap">
+              {deals.map((product) => (
+                <Card key={product._id} product={product} />
+              ))}
+            </div>
+          </div>
           <section className="text-gray-600 body-font">
             <div className="container px-5 py-10 mx-auto">
               <div className="text-center mb-10">
@@ -112,4 +133,14 @@ export default function Home() {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const response1 = await fetch(`${process.env.HOST}deals`);
+  let deals = await response1.json();
+  const response2 = await fetch(`${process.env.HOST}bestsellers`);
+  let best = await response2.json();
+  return {
+    props: { deals, best },
+  };
 }
