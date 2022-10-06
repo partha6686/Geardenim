@@ -29,7 +29,7 @@ const Cart = () => {
                   ))}
               </div>
               <div className="w-full md:w-5/12">
-                <div className="bg-cust_white p-3 m-2 rounded-md">
+                <div className="bg-cust_white p-3 m-2 rounded-md shadow-lg">
                   <h2 className="mb-4">
                     PRICE DETAILS ({cartCtx.cart.length} Items)
                   </h2>

@@ -306,6 +306,11 @@ const Navbar = () => {
                 BBG
               </div>
             </Link>
+            <Link href="/shop/brand/Furygan">
+              <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
+                Furygan
+              </div>
+            </Link>
             <Link href="/shop/brand/MT">
               <div className="py-2 my-1 pl-4 hover:bg-cust_grey cursor-pointer">
                 MT

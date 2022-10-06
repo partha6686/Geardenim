@@ -6,7 +6,7 @@ const Card = ({ product }) => {
   return (
     <div className="px-1 py-2 sm:p-4 lg:w-1/4 w-1/2">
       <Link href={`/product/${product.slug}`}>
-        <div className="w-full max-w-xs mx-auto rounded-lg shadow-lg border-2 border-cust_grey bg-cust_white cursor-pointer">
+        <div className="w-full max-w-xs mx-auto rounded-lg shadow-lg border-2 border-cust_grey bg-cust_white cursor-pointer  min-h-[400px]">
           <div className="relative text-center overflow-hidden h-60 w-full border-b-4 border-cust_light">
             <Image
               className=" w-full h-full"
@@ -32,10 +32,10 @@ const Card = ({ product }) => {
             <h3 className="text-xs sm:text-base text-cust_light_text mb-1">
               {product.title}
             </h3>
-            <h2 className="text-lg font-semibold text-cust_dark my-1 sm:my-2">
-              <span> ₹ {product.price} </span>
+            <h2 className="text-base font-semibold text-cust_dark my-1 sm:my-2">
+              <span> ₹{product.price} </span>
               <span className="mx-1 line-through text-cust_green">
-                ₹ {product.mrp}
+                ₹{product.mrp}
               </span>
             </h2>
           </div>
