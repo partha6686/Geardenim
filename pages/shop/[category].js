@@ -18,6 +18,12 @@ const ProductPage = ({ products }) => {
         </Head>
         <div className="bg-cust_light min-h-screen">
           <div className="container mx-auto sm:p-5 ">
+            <h1 className="m-2 sm:mx-6 my-2">
+              <span className="text-cust_light_text">Category: </span>
+              <span className="uppercase text-lg font-semibold">
+                {category}
+              </span>
+            </h1>
             <div className="flex flex-wrap">
               {products.map((product) => (
                 <Card key={product._id} product={product} />

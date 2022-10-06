@@ -2,14 +2,10 @@ import Head from "next/head";
 import Image from "next/image";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
-import { FiTruck } from "react-icons/fi";
-import { BsArrowRepeat } from "react-icons/bs";
-import { TbDiscount2 } from "react-icons/tb";
-import { TbHeadset } from "react-icons/tb";
-import Card from "../components/Card";
 import BestSellerIndex from "../components/BestSellerIndex";
 import BestDealsIndex from "../components/BestDealsIndex";
 import Category from "../components/Category";
+import BrandsIndex from "../components/BrandsIndex";
 
 export default function Home({ deals, best }) {
   return (
@@ -58,6 +54,7 @@ export default function Home({ deals, best }) {
           <BestSellerIndex products={best} />
           <Category />
           <BestDealsIndex products={deals} />
+          <BrandsIndex />
         </div>
       </div>
     </div>
