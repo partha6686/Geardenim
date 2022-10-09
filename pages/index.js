@@ -20,17 +20,17 @@ export default function Home({ deals, best }) {
       <div>
         <div className="bg-[url('/hero-1.jpg')] sm:bg-[url('/hero-2.jpg')] bg-no-repeat bg-center md:bg-none md:flex max-w-[1600px] m-auto">
           <div className="md:w-1/2">
-            <div className="p-12 lg:mx-12 lg:my-8 lg:p-12 font-['Josefin_Sans'] lg:rounded-md backdrop-brightness-50 md:bg-emerald-100">
-              <h1 className="text-2xl lg:text-4xl font-bold py-8 uppercase max-w-sm text-white md:text-cust_dark">
+            <div className="p-12 lg:p-16 font-['Josefin_Sans'] backdrop-brightness-50 md:bg-emerald-100">
+              <h1 className="text-3xl lg:text-4xl font-bold py-8 uppercase max-w-sm text-white md:text-cust_dark">
                 Gear up for the biggest ride of your life
               </h1>
               <div className="my-8">
-                <h3 className="text-white md:text-cust_light_text font-light lg:text-lg ">
+                <h3 className="text-white md:text-cust_light_text font-light lg:text-lg pt-8">
                   SHOP OUR LATEST COLLECTIONS
                 </h3>
 
                 <Link href="/new-releases">
-                  <button className="text-xs tracking-widest lg:text-base px-7 pb-2 pt-3 font-semibold text-white bg-cust_green hover:bg-emerald-500 my-4 transition duration-500 ease-in-out">
+                  <button className="text-xs tracking-widest lg:text-base px-7 pb-2 pt-3 font-semibold text-white bg-cust_green hover:bg-emerald-500 mt-2 mb-6 transition duration-500 ease-in-out">
                     SHOP NOW
                   </button>
                 </Link>
