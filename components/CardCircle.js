@@ -10,7 +10,7 @@ const CardCircle = ({ title, link, imgsrc, clr }) => {
           className={`relative text-center overflow-hidden h-24 sm:h-40 w-24 sm:w-40 rounded-full border-[4px] sm:border-[7px] ${clr}  mx-4`}
         >
           <Image
-            className=" w-full h-full"
+            className=" w-full h-full hover:scale-110 transition duration-300 ease-in-out"
             src={imgsrc}
             alt="product"
             layout="fill"

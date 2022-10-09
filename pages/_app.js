@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import theme from "../src/theme/theme";
 import FullLayout from "../src/layouts/FullLayout";
 import { ThemeProvider } from "@mui/material/styles";
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {
   const [progress, setProgress] = useState(0);
@@ -35,6 +36,14 @@ function MyApp({ Component, pageProps }) {
   const isAdmin = router.pathname.includes("/admin") ? true : false;
   return (
     <>
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
       <UserState>
         {isAdmin ? (
           <ThemeProvider theme={theme}>

@@ -220,7 +220,7 @@ const Navbar = () => {
       )}
       <div
         ref={ref}
-        className="w-72 sm:w-96 fixed top-0 left-0 bg-cust_white z-50 transform transition-transform -translate-x-full"
+        className="w-72 sm:w-96 fixed top-0 left-0 bg-cust_white z-50 transform transition-transform -translate-x-full duration-300 ease-in-out"
       >
         <div className="p-4 bg-cust_green text-cust_white text-2xl font-bold flex items-center justify-between">
           {userCtx.isLoggedIn && userCtx.user ? (

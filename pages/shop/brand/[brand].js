@@ -14,7 +14,7 @@ const ProductPage = ({ products }) => {
     return (
       <>
         <Head>
-          <title>{_.capitalize(brand)} - Geardenim.com</title>
+          <title>{brand} - Geardenim.com</title>
         </Head>
         <div className="bg-cust_light min-h-screen">
           <div className="container mx-auto sm:p-5 ">

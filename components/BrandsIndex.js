@@ -7,7 +7,7 @@ const BrandsIndex = () => {
   return (
     <div className="w-full bg-emerald-100">
       <div className="container mx-auto sm:p-5 py-4 mt-4">
-        <h1 className="text-xl sm:text-3xl font-bold mx-1 sm:mx-6 mt-4 text-gray-800 text-center">
+        <h1 className="text-xl sm:text-3xl font-bold mx-1 sm:mx-6 mt-4 text-gray-800 text-center font-['Josefin_Sans']">
           TOP BRANDS
         </h1>
         <UnderLine />
