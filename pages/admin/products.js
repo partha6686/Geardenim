@@ -89,7 +89,7 @@ const Products = (props) => {
                         fontWeight: "500",
                       }}
                     >
-                      <a href={`/product/${product.slug}`} target="_blank">
+                      <a href={`/product/${product.slug}`} target="_blank" rel="noreferrer">
                         {product.title}
                       </a>
                     </Typography>
