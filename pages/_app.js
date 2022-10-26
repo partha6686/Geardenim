@@ -12,6 +12,7 @@ import theme from "../src/theme/theme";
 import FullLayout from "../src/layouts/FullLayout";
 import { ThemeProvider } from "@mui/material/styles";
 import Head from "next/head";
+import AdminState from "../store/AdminState";
 
 function MyApp({ Component, pageProps }) {
   const [progress, setProgress] = useState(0);
@@ -38,7 +39,11 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="true"
+        />
         <link
           href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
@@ -46,23 +51,25 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <UserState>
         {isAdmin ? (
-          <ThemeProvider theme={theme}>
-            <ToastContainer
-              position="bottom-right"
-              theme="colored"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-            />
-            <FullLayout>
-              <Component {...pageProps} />
-            </FullLayout>
-          </ThemeProvider>
+          <AdminState>
+            <ThemeProvider theme={theme}>
+              <ToastContainer
+                position="bottom-right"
+                theme="colored"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
+              <FullLayout>
+                <Component {...pageProps} />
+              </FullLayout>
+            </ThemeProvider>
+          </AdminState>
         ) : (
           <CartState>
             <ToastContainer

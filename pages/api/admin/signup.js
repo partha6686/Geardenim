@@ -1,12 +1,12 @@
-import User from "../../models/User";
-import connectDb from "../../middleware/db";
+import Admin from "../../../models/Admin";
+import connectDb from "../../../middleware/db";
 const bcrypt = require("bcryptjs");
 
 const handler = async (req, res) => {
   try {
     if (req.method == "POST") {
-      let user = await User.findOne({ email: req.body.email });
-      if (user) {
+      let admin = await Admin.findOne({ email: req.body.email });
+      if (admin) {
         return res.status(400).json({
           error:
             "A user with the given email alredy exists.Please login to continue.",
@@ -24,12 +24,18 @@ const handler = async (req, res) => {
       } else {
         bcrypt.hash(req.body.password, 10, async (err, hash) => {
           if (!err) {
-            user = await User.create({
+            admin = await Admin.create({
               name: req.body.name,
               email: req.body.email,
+              role: req.body.role,
               password: hash,
+              gender: req.body.gender,
+              address: req.body.address,
+              phone: req.body.phone,
+              pincode: req.body.pincode,
+              dob: req.body.dob,
             });
-            if (user) {
+            if (admin) {
               res.status(200).json({ msg: "Account Created Successfully" });
             } else {
               throw "Some Unexpected error Occured.";

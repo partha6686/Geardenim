@@ -13,7 +13,6 @@ import {
   Pagination,
 } from "@mui/material";
 import BaseCard from "../../src/components/baseCard/BaseCard";
-import Link from "next/link";
 
 const Products = (props) => {
   const [products, setProducts] = useState(props.products);

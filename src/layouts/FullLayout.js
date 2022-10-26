@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import {
   experimentalStyled,
   useMediaQuery,
@@ -8,6 +8,9 @@ import {
 import Header from "./header/Header";
 import Sidebar from "./sidebar/Sidebar";
 import Footer from "./footer/Footer";
+import { AdminContext } from "../../store/AdminState";
+import { getCookie } from "cookies-next";
+import { useRouter } from "next/router";
 
 const MainWrapper = experimentalStyled("div")(() => ({
   display: "flex",
@@ -31,6 +34,28 @@ const PageWrapper = experimentalStyled("div")(({ theme }) => ({
 }));
 
 const FullLayout = ({ children }) => {
+  const adminCtx = useContext(AdminContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (getCookie("isAdminLoggedIn") !== true) {
+      router.push("/admin/login");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    adminCtx.fetchAdmin();
+    if (getCookie("isAdminLoggedIn") !== adminCtx.isLoggedIn) {
+      adminCtx.setIsLoggedIn(getCookie("isAdminLoggedIn"));
+    }
+    if (getCookie("isAdminLoggedIn") !== true) {
+      router.push("/admin/login");
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getCookie("isAdminLoggedIn"), router.asPath]);
+
   const [isSidebarOpen, setSidebarOpen] = React.useState(true);
   const [isMobileSidebarOpen, setMobileSidebarOpen] = React.useState(false);
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
