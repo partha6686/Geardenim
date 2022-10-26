@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import FeatherIcon from "feather-icons-react";
 import Image from "next/image";
-import userimg from "../../../assets/images/users/user2.jpg";
+import userimg from "../../../assets/images/users/user.jpg";
 import {
   Box,
   Menu,
